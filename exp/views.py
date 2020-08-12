@@ -4,7 +4,6 @@ from django.forms.models import model_to_dict
 
 
 def expmap_data(request):
-
     data = Point.objects.all()
     map_list = []
     for d in data:
