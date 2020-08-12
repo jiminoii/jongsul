@@ -6,17 +6,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('fas', '0001_initial'),
+        ('food', '0003_food_point_tel'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Inpo',
+            name='Food_Inpo',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
-                ('adress', models.CharField(max_length=100)),
-                ('phone', models.CharField(max_length=100)),
+                ('address', models.CharField(max_length=100)),
+                ('tel', models.CharField(max_length=100)),
             ],
+        ),
+        migrations.DeleteModel(
+            name='Food_Point',
         ),
     ]
