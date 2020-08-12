@@ -5,7 +5,7 @@ import mini_project.views as views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
-    path('food/<int:id>', views.food),
+    path('food/', views.food),
     path('stay/', views.stay),
     path('festival/', views.festival),
     path('exp/', views.exp),

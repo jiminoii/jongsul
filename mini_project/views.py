@@ -1,11 +1,8 @@
 from django.http import HttpResponse,HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
-<<<<<<< HEAD
 from food.models import Food_Point
-=======
 import requests
 
->>>>>>> 246c20d736c09bcb4e87cecc29b0c3ed80e98d3e
 def index(request):
     return render(request, 'index.html')
 
