@@ -23,5 +23,5 @@ urlpatterns = [
     path('food/', views.food),
     path('stay/', views.stay),
     path('festival/', views.festival),
-    path('travel/', views.travel),
+    path('exp/', views.exp),
 ]

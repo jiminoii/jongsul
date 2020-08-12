@@ -13,5 +13,5 @@ def festival(request):
 def stay(request):
     return render(request, 'stay.html')
 
-def travel(request):
-    return render(request, 'travel.html')
+def exp(request):
+    return render(request, 'exp.html')
