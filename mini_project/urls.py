@@ -8,5 +8,9 @@ urlpatterns = [
     path('food/', views.food),
     path('stay/', views.stay),
     path('festival/', views.festival),
-    path('travel/', views.travel),
+    path('exp/', views.exp),
+<<<<<<< HEAD
 ]
+=======
+]
+>>>>>>> fb4cfae32d8c88a2ef593e18bd849bdf6f41eb53
