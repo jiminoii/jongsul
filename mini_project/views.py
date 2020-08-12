@@ -1,6 +1,6 @@
 from django.http import HttpResponse,HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
-from food.models import Food_Point
+from food.models import Food_Inpo
 from exp.models import Inpo
 import requests
 
@@ -8,9 +8,9 @@ def index(request):
     return render(request, 'index.html')
 
 def food(request):
-    food_point = Food_Point.objects.order_by('-id')
+    food_point = Food_Inpo.objects.order_by('-id')
     context = {
-        'food_point' : food_point
+    'food_point' : food_point
     }
     return render(request, 'food.html', context)
 
