@@ -25,6 +25,7 @@ def exp(request):
 def festival(request):
     return render(request, 'festival.html')
 
+
 def stay(request):
     result = requests.get('https://www.tourandong.com/public/sub3/sub2.cshtml')
     result.encoding = 'utf-8'
