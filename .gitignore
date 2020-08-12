@@ -157,3 +157,8 @@ dmypy.json
 .history
 
 # End of https://www.toptal.com/developers/gitignore/api/django,visualstudiocode
+mini_project/__pycache__/__init__.cpython-38.pyc
+mini_project/__pycache__/settings.cpython-38.pyc
+mini_project/__pycache__/urls.cpython-38.pyc
+mini_project/__pycache__/views.cpython-38.pyc
+mini_project/__pycache__/wsgi.cpython-38.pyc
