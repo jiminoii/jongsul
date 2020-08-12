@@ -1,5 +1,6 @@
 from django.http import HttpResponse,HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
+from food.models import Food_Inpo
 from exp.models import Inpo
 import requests
 
@@ -7,7 +8,12 @@ def index(request):
     return render(request, 'index.html')
 
 def food(request):
-    return render(request, 'food.html')
+    food_point = Food_Inpo.objects.order_by('-id')
+    context = {
+    'food_point' : food_point
+    }
+    return render(request, 'food.html', context)
+
 
 def exp(request):
     info_list = Inpo.objects.order_by('-id')
@@ -30,7 +36,7 @@ def stay(request):
         s_table = result.find('<table',e_table)
         s_table = result.find('>',s_table)
         if s_table == -1:
-            break;
+            break
         e_table = result.find('</table>',s_table)
         star += '<div class="jumbotron"><table class="table table-hover"'+result[s_table:e_table+8]+'</div>'
     r_ta = {
