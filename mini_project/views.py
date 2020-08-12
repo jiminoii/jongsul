@@ -15,3 +15,4 @@ def stay(request):
 
 def travel(request):
     return render(request, 'travel.html')
+
