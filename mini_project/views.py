@@ -27,7 +27,7 @@ def stay(request):
         if s_table == -1:
             break;
         e_table = result.find('</table>',s_table)
-        star += '<table class="table table-hover"'+result[s_table:e_table+8]
+        star += '<div class="jumbotron"><table class="table table-hover"'+result[s_table:e_table+8]+'</div>'
     r_ta = {
         'contact' : star
     }
