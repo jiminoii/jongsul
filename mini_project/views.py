@@ -9,3 +9,11 @@ def food(request):
 
 def exp(request):
     return render(request, 'exp.html')
+    
+def festival(request):
+    return render(request, 'festival.html')
+
+def stay(request):
+    return render(request, 'stay.html')
+
+
