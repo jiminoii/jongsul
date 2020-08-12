@@ -8,7 +8,7 @@ def index(request):
     return render(request, 'index.html')
 
 def food(request):
-    food_point = Food_Inpo.objects.order_by('-id')
+    food_point = Food_Inpo.objects.order_by('id')
     context = {
     'food_point' : food_point
     }

@@ -65,18 +65,21 @@
               <table class="table table-hover">
                   <thead>
                       <tr>
-                          <th>번호</th>
-                          <th>상호명</th>
-                          <th>주소</th>
-                          <th>전화번호</th>
+                          <th style="text-align: center;">번호</th>
+                          <th style="text-align: center;">상호명</th>
+                          <th style="text-align: center;">주소</th>
+                          <th style="text-align: center;">전화번호</th>
+                          
                       </tr>
                   </thead>
                   <tbody>
                       {% for food in food_point %}
+                      <tr>
                           <td>{{ food.id }}</td>   <!-- 게시물 번호(PK) -->
                           <td>{{ food.name }}</td>
                           <td>{{ food.address }}</td>     
-                          <td>{{ food.tel }}</td>    
+                          <td>{{ food.tel }}</td>   
+                           </tr>
                       {% endfor %}
                   </tbody>
               </table>
