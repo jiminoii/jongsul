@@ -12,4 +12,4 @@ urlpatterns = [
     path('exp/', views.exp),
     path('expmap_data/', views2.expmap_data),
 ]
-]
+
