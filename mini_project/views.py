@@ -3,25 +3,36 @@ from django.shortcuts import render
 from food.models import Food_Inpo
 from exp.models import Inpo
 import requests
+from bs4 import BeautifulSoup as bs
 
 def index(request):
     return render(request, 'index.html')
 
 def food(request):
-    food_point = Food_Inpo.objects.order_by('-id')
+    food_point = Food_Inpo.objects.order_by('id')
     context = {
     'food_point' : food_point
     }
     return render(request, 'food.html', context)
-
+    
 
 def exp(request):
-    info_list = Inpo.objects.order_by('-id')
-    context = {
-    'info_list' : info_list
+    info_list = Inpo.objects.order_by('id')
+    address = 'https://www.tourandong.com/public/sub2/sub4.cshtml'
+    res = requests.get(address)
+    res.encoding = None
+    stra =""
+    parse = bs(res.text, 'html.parser')
+    a_list = parse.select('#contentDiv a p')
+    for a in a_list:
+        stra += (a.text)[:-6]+'<br/>'
+    aa = {
+        'contact' : stra,
+        'gg' : info_list,
     }
-    return render(request, 'exp.html', context)
+    return render(request, 'exp.html', aa)
     
+
 def festival(request):
     return render(request, 'festival.html')
 
