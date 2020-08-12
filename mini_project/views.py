@@ -6,3 +6,12 @@ def index(request):
 
 def food(request):
     return render(request, 'food.html')
+    
+def festival(request):
+    return render(request, 'festival.html')
+
+def stay(request):
+    return render(request, 'stay.html')
+
+def travel(request):
+    return render(request, 'travel.html')

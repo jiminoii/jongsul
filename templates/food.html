@@ -5,7 +5,16 @@
     <div class="row content">
       <div class="col-sm-2 sidenav">
         <p><a href="#">찜닭 </a></p>
-        
+        <!-- 찜닭 버튼을 누르면 밥집 목록이 지도 밑부분에 뜨도록 -->
+        <tbody>
+          {% for article in article_list %}
+          <tr onclick='location="/article/detail/{{ article.id }}" '>     <!-- onclick = 속성, 페이지 이동 사용 -->
+              <td>{{ food.id }}</td>   <!-- 게시물 번호(PK) -->
+              <td>{{ food.title }}</td>
+              <td>{{ food.location }}</td>             
+          </tr>
+          {% endfor %}
+      </tbody>
         <p><a href="#">종류2</a></p>
         <p><a href="#">종류3</a></p>
       </div>
