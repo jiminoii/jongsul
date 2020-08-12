@@ -15,5 +15,3 @@ def festival(request):
 
 def stay(request):
     return render(request, 'stay.html')
-
-
