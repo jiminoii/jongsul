@@ -13,10 +13,10 @@ def food(request):
     'food_point' : food_point
     }
     return render(request, 'food.html', context)
-
+    
 
 def exp(request):
-    info_list = Inpo.objects.order_by('-id')
+    info_list = Inpo.objects.order_by('id')
     context = {
     'info_list' : info_list
     }
