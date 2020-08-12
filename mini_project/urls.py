@@ -20,4 +20,5 @@ import mini_project.views as views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
+    path('food/', views.food),
 ]
