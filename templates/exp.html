@@ -4,15 +4,15 @@
 <div class="container-fluid text-center">    
     <div class="row content">
       <div class="col-sm-2 sidenav">
-        <p><a href="#">전통공예체험</a></p>
+        <p><a href="#exp1">전통공예체험</a></p>
         <p><a href="#">레포츠체험</a></p>
         <p><a href="#">농촌체험</a></p>
       </div>
       <div class="col-sm-8 text-left">    
         <h1>체험여행</h1>
-        <p>누구나 놀러오고 싶은 안동에서 체험할 수 있는 것들.</p>
+        <p>누구나 놀러오고 싶은 '안동'에서 '체험'할 수 있는 것들.</p>
         <hr> 
-        <div id="map" style="width:1000px; height:400px; margin:0 auto;"></div>
+        <div id="map" style="width:800px; height:400px; margin:0 auto;"></div>
         <div class="container text-center">         
           <script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=fe4fe669c0e29292e13e253ea4ca331f"></script>
           <script>
@@ -67,32 +67,34 @@
               })
           </script>
           </div>
-          <div class="jumbotron">
+          {{contact|safe}}
+          <h2 id="exp1">[전통공예체험]</h2>
+          <div class="jumbotron" style="background-color: #F6F6F6;">
             <div class="container text-center">
                 <table class="table table-hover">
                     <thead>
-                        <tr>
-                            <th>번호</th>
-                            <th>상호명</th>
-                            <th>주소</th>
-                            <th>전화번호</th>
+                        <tr style="text-align: center;">
+                            <th style="text-align: center;">번호</th>
+                            <th style="text-align: center;">상호명</th>
+                            <th style="text-align: center;">주소</th>
+                            <th style="text-align: center;">전화번호</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for exp in info_list.objects.all %}
+                        {% for exp in gg %}
+                        <tr>
                             <td>{{ exp.id }}</td>   <!-- 게시물 번호(PK) -->
                             <td>{{ exp.name }}</td>
                             <td>{{ exp.adress }}</td>     
-                            <td>{{ exp.phone }}</td>    
+                            <td>{{ exp.phone }}</td>  
+                        </tr>  
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
           </div>
-            
-
       </div>
-
+      
 
       <div class="col-sm-2 sidenav">
         <div class="well">

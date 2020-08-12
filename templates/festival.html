@@ -23,23 +23,26 @@
 
       <div class="col-sm-8 text-left" style="margin-top: 20px;">
         <div style='width: 100%; height: 30px; background-color: darkgray;'>
-            <p style="padding-top: 5px; padding-left: 10px;">제목을 적어주세요</p>
+            <p style="padding-top: 5px; padding-left: 10px; color: cornsilk;">안동탈춤페스티벌</p>
         </div> 
-        <div class="jumbotron">
+
+        <div class="jumbotron" style="background-color: #f8f9fa;">
         
         <!-- 지도 -->
         <div class="container text-center">
-        <div id="map" style="width:500px; height:400px; margin:0 auto;"></div>
+        <div id="map" style="width:100%; height:400px; margin:0 auto;"></div>
         </div>
 
         <!-- 상세정보 -->
         <div class="Contents">
             <div class="img-source">
-                <img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
+                <img src="https://www.tourandong.com/Public/sub2/images/s1_4img1.jpg" class="img-responsive" style="width:100%" alt="Image">
             </div>
 
             <div class="text-source">
-                <p style="text-align: center;">내용을 적어주세요.</p>
+                <p style="text-align: left;">시기 : 매년 3월 ~ 4월 (벚꽃개화 시기)</p>
+                <p style="text-align: left;">장소 :   안동 낙동강변 벚꽃길에서</p>
+                <p style="text-align: left;">내용 :   야간 조명쇼, 네온아트 전시, 조명터널, 포토존, 풍물시장과 안동의 음식, 거리공연 등</p>
             </div>
         </div>
 
@@ -64,7 +67,7 @@
                   marker.setMap(map);
                   
                   $.ajax({
-                    url: '/expmap_data/',
+                    url: '/fes_map/',
                     data: {},
                     success: function (res) {
                       for (var i = 0; i < res.length; i++) {
