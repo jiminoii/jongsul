@@ -31,6 +31,7 @@ def signin(request):
         # select * from user where email=? and pwd=?
             user = User.objects.get(id1=id1, pwd=pwd)
             request.session['id1'] = id1
+            
             return render(request, 'signin_success.html')
         except:
             return render(request, 'signin_fail.html')
@@ -40,7 +41,7 @@ def signin(request):
 def signout(request):
     del request.session['id1'] # 개별 삭제
     request.session.flush() # 전체 삭제
-    return HttpResponseRedirect('/index/')
+    return HttpResponseRedirect('/')
 
 def food(request):
     # food_point = Food_Inpo.objects.order_by('id')
@@ -190,6 +191,24 @@ def stay(request):
     s_table = 0
     e_table = 0
     star1 = ""
+    parse = bs(result,'html.parser')
+    latlngs = parse.select('tbody tr')
+    tds = parse.select('tbody td')
+    i = 0
+    data1 = []
+    for latlan in latlngs:
+        obj = {}
+        obj['latlan'] = latlan['data-map']
+        if tds[i*4].text.find('\n') == -1:
+            obj['place'] = tds[i*4].text
+        else:
+            obj['place'] = tds[i*4].text[:tds[i*4].text.find('\n')-1]+tds[i*4].text[tds[i*4].text.find('\n')+1:]
+        if tds[i*4+2].text.find('\n') == -1:
+            obj['tel'] = tds[i*4+2].text
+        else:
+            obj['tel'] = tds[i*4+2].text[:tds[i*4+2].text.find('\n')-1]
+        i+=1
+        data1.append(obj)
     while True:
         s_table = result.find('<table',e_table)
         s_table = result.find('>',s_table)
@@ -203,6 +222,24 @@ def stay(request):
     s_table = 0
     e_table = 0
     star2 = ""
+    parse = bs(result,'html.parser')
+    latlngs = parse.select('tbody tr')
+    tds = parse.select('tbody td')
+    i = 0
+    data2 = []
+    for latlan in latlngs:
+        obj = {}
+        obj['latlan'] = latlan['data-map']
+        if tds[i*5].text.find('\n') == -1:
+            obj['place'] = tds[i*5].text
+        else:
+            obj['place'] = tds[i*5].text[:tds[i*5].text.find('\n')-1]+tds[i*5].text[tds[i*5].text.find('\n')+1:]
+        if tds[i*5+2].text.find('\n') == -1:
+            obj['tel'] = tds[i*5+2].text
+        else:
+            obj['tel'] = tds[i*5+2].text[:tds[i*5+2].text.find('\n')-1]
+        i+=1
+        data2.append(obj)
     while True:
         s_table = result.find('<table',e_table)
         s_table = result.find('>',s_table)
@@ -216,6 +253,24 @@ def stay(request):
     s_table = 0
     e_table = 0
     star3 = ""
+    parse = bs(result,'html.parser')
+    latlngs = parse.select('tbody tr')
+    tds = parse.select('tbody td')
+    i = 0
+    data3 = []
+    for latlan in latlngs:
+        obj = {}
+        obj['latlan'] = latlan['data-map']
+        if tds[i*5].text.find('\n') == -1:
+            obj['place'] = tds[i*5].text
+        else:
+            obj['place'] = tds[i*5].text[:tds[i*5].text.find('\n')-1]+tds[i*5].text[tds[i*5].text.find('\n')+1:]
+        if tds[i*5+2].text.find('\n') == -1:
+            obj['tel'] = tds[i*5+2].text
+        else:
+            obj['tel'] = tds[i*5+2].text[:tds[i*5+2].text.find('\n')-1]
+        i+=1
+        data3.append(obj)
     while True:
         s_table = result.find('<table',e_table)
         s_table = result.find('>',s_table)
@@ -229,6 +284,23 @@ def stay(request):
     s_table = 0
     e_table = 0
     star4 = ""
+    parse = bs(result,'html.parser')
+    latlngs = parse.select('tbody tr')
+    tds = parse.select('tbody td')
+    i = 0
+    for latlan in latlngs:
+        obj = {}
+        obj['latlan'] = latlan['data-map']
+        if tds[i*4].text.find('\n') == -1:
+            obj['place'] = tds[i*4].text
+        else:
+            obj['place'] = tds[i*4].text[:tds[i*4].text.find('\n')-1]+tds[i*4].text[tds[i*4].text.find('\n')+1:]
+        if tds[i*4+2].text.find('\n') == -1:
+            obj['tel'] = tds[i*4+2].text
+        else:
+            obj['tel'] = tds[i*4+2].text[:tds[i*4+2].text.find('\n')-1]
+        i+=1
+        data.append(obj)
     while True:
         s_table = result.find('<table',e_table)
         s_table = result.find('>',s_table)
@@ -242,6 +314,23 @@ def stay(request):
     s_table = 0
     e_table = 0
     star5 = ""
+    parse = bs(result,'html.parser')
+    latlngs = parse.select('tbody tr')
+    tds = parse.select('tbody td')
+    i = 0
+    for latlan in latlngs:
+        obj = {}
+        obj['latlan'] = latlan['data-map']
+        if tds[i*4].text.find('\n') == -1:
+            obj['place'] = tds[i*4].text
+        else:
+            obj['place'] = tds[i*4].text[:tds[i*4].text.find('\n')-1]+tds[i*4].text[tds[i*4].text.find('\n')+1:]
+        if tds[i*4+2].text.find('\n') == -1:
+            obj['tel'] = tds[i*4+2].text
+        else:
+            obj['tel'] = tds[i*4+2].text[:tds[i*4+2].text.find('\n')-1]
+        i+=1
+        data1.append(obj)
     while True:
         s_table = result.find('<table',e_table)
         s_table = result.find('>',s_table)
@@ -256,7 +345,10 @@ def stay(request):
         'contact3' : star3,
         'contact4' : star4,
         'contact5' : star5,
-        'data' : data
+        'data' : data,
+        'data1' : data1,
+        'data2' : data2,
+        'data3' : data3,
     }
     return render(request, 'stay.html',r_ta)
 
