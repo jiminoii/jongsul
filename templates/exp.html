@@ -1,25 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="container-fluid text-center">    
-    <div class="row content">
-      <div class="col-sm-2 sidenav">
-        <div class="wrapper">
-          <ui class="mainMenu">
-              <li class="item" id="account">
-                  <a href="#account" class="btn"><i class="fas fa-user-circle"></i>안동축제</a>
-                  <div class="subMenu">
+<div class="container-fluid text-center">
+  <div class="row content" style="height:818.6px;">
+    <div class="col-sm-2 sidenav" style="height:818.6px;">
+      <div id="scroll" style="position:absolute; margin-top: 20px; left: 20px; right:  20px;">
+        <div class="tabs">
+          <div class="tab">
+            <input type="checkbox" id="chck1">
+            <label class="tab-label" for="chck1">축제</label>
+            <div class="tab-content">
+              <ul>
+                <li class="dropdown" style="width: 100%">
+                  <div class="dropdown-content">
                     <p><a href="#exp1">전통공예체험</a></p>
                     <p><a href="#exp2">레포츠체험</a></p>
                     <p><a href="#exp3">농촌체험</a></p>
+                    <p><a href="#exp4">꽃여행</a></p>
                   </div>
-              </li>
-              <li class="item">
-                  <a href="#" class="btn"><i class="fas fa-sign-out-alt"></i>Log Out</a>
-              </li>
-          </ui>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-      </div>
+    </div>
+
       <div class="col-sm-8 text-left">    
         <h1>체험여행</h1>
         <p>누구나 놀러오고 싶은 '안동'에서 '체험'할 수 있는 것들.</p>
@@ -79,7 +85,8 @@
               })
           </script>
           </div>
-          <h2 id="exp1">[전통공예체험]</h2>
+          <hr><br>
+          <h3 id="exp1" style="text-align: center;">전통공예체험</h3>
           <div class="jumbotron" style="background-color: #f5f5f5;">
             <div class="container">
                 <table class="table table-hover">
@@ -102,15 +109,15 @@
                 </table>
             </div>
           </div>
-
-          <h2 id="exp2">[레포츠체험]</h2>
+          <br>
+          <h3 id="exp2" style="text-align: center;">레포츠체험</h3>
           <div class="jumbotron" style="background-color: #f5f5f5;">{{contact|safe}}</div>
+          <br>
 
-
-          <h2 id="exp3">[농촌체험]</h2>
+          <h3 id="exp3" style="text-align: center;">농촌체험</h3>
           <div class="jumbotron" style="background-color: #f5f5f5;">{{contact2|safe}}</div>
-
-          <h2 id="exp4">[꽃여행]</h2>
+          <br>
+          <h3 id="exp4" style="text-align: center;">꽃여행</h3>
           <div class="jumbotron" style="background-color: #f5f5f5;">{{contact3|safe}}</div>
       </div>
       

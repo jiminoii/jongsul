@@ -4,9 +4,25 @@ from food.models import Food_Inpo
 from exp.models import Inpo
 import requests
 from bs4 import BeautifulSoup as bs
+from user.models import User
 
 def index(request):
     return render(request, 'index.html')
+
+
+
+def signup(request):
+    if request.method == 'POST':
+        # 회원정보 저장
+        id1 = request.POST.get('id1')
+        name = request.POST.get('name')
+        pwd = request.POST.get('pwd')
+        users = User(id1=id1, name=name, pwd=pwd)
+        users.save()
+        return HttpResponseRedirect('/index/')
+    return render(request, 'signup.html')
+
+
 
 def food(request):
     # food_point = Food_Inpo.objects.order_by('id')
