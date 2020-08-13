@@ -287,3 +287,11 @@ def list(request):
         'commu_list' : commu_list
     }
     return render(request, 'commu_list.html', context)
+
+def detail(request, id):
+    # select * from article where id = ?
+    board = Board.objects.get(id=id)
+    context = {
+        'board' : board
+    }
+    return render(request, 'detail.html', context)
