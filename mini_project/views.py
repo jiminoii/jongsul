@@ -56,7 +56,7 @@ def stay(request):
         if s_table == -1:
             break
         e_table = result.find('</table>',s_table)
-        star += '<div class="jumbotron"><table class="table table-hover"'+result[s_table:e_table+8]+'</div>'
+        star += '<table class="table table-hover"'+result[s_table:e_table+8]
     result = requests.get('https://www.tourandong.com/public/sub3/sub2_2.cshtml')
     result.encoding = 'utf-8'
     result = result.text
