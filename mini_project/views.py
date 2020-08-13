@@ -352,6 +352,16 @@ def stay(request):
     }
     return render(request, 'stay.html',r_ta)
 
+<<<<<<< HEAD
+def festival2(request):
+    return render(request, 'festival2.html')
+
+def festival3(request):
+    return render(request, 'festival3.html')
+
+def festival4(request):
+    return render(request, 'festival4.html')
+=======
 def community(request):
     return render(request, 'community.html')
 
@@ -386,4 +396,5 @@ def detail(request, id):
     context = {
         'board' : board
     }
+
     return render(request, 'detail.html', context)
