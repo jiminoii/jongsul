@@ -155,14 +155,6 @@
   var map3 = new kakao.maps.Map(container3, options3);
 
   var positions = [
-<<<<<<< HEAD
-    {% for d in data%}
-    {
-        content: "<div>{{d.place}}</div><div>{{d.tel}}</div>", 
-        latlng: new kakao.maps.LatLng({{d.latlan}})
-    }
-    {% endfor %}
-=======
     {% for d in data %}
   {
     content: "<div>{{d.place}}</div><div>{{d.tel}}</div>",
@@ -193,7 +185,6 @@ var positions3 = [
       latlng: new kakao.maps.LatLng({{ d.latlan }})
     },
   {% endfor %}
->>>>>>> 67d065dcd09caa202d6dc0057379133ea3df3568
 ];
 
 for (var i = 0; i < positions.length; i ++) {
