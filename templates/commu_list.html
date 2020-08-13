@@ -11,11 +11,11 @@
                 </tr>
             </thead>
             <tbody>
-                {% for board in board_list %}
+                {% for user in user_list %}
                 <tr>
-                    <td>{{ board.title }}</td>
-                    <td>{{ board.content }}</td>
-                    <td>{{ board.user.name }}</td>
+                    <td>{{ user.title }}</td>
+                    <td>{{ user.content }}</td>
+                    <td>{{ user.user.name }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

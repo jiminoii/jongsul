@@ -20,7 +20,8 @@ urlpatterns = [
     path('expmap_data/', views2.expmap_data),
     path('foodmap_data/', views4.foodmap_data),
     path('fes_map/', views3.map_data),
-    path('community/', views.community),
-    path('board/commu_write/', views.write),
-    path('board/list/', views.list),
+    path('commu_write/', views.write),
+    path('user/list/', views.write),
+
+
 ]
