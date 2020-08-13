@@ -1,8 +1,8 @@
 from django.http import JsonResponse # JSON 응답
-from fas.models import Point
+from fas.models import Inpo
 from django.forms.models import model_to_dict
 def map_data(request):
-    data = Point.objects.all()
+    data = Inpo.objects.all()
     map_list = []
     for d in data:
         d = model_to_dict(d) # QuerySet -> Dict

@@ -15,6 +15,5 @@ urlpatterns = [
     path('exp/', views.exp),
     path('expmap_data/', views2.expmap_data),
     path('foodmap_data/', views4.foodmap_data),
-
     path('fes_map/', views3.map_data),
 ]
