@@ -209,7 +209,20 @@
           <li><a href="/community/">Community</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          {% if request.session.email %}
+          <li>
+            <a href="/signout/">
+              <span class="glyphicon glyphicon-log-out"></span> Logout
+              {{ request.session.email }} 님 반갑습니다.
+            </a>
+          </li>
+          {% else %}
+          <li>
+            <a href="/signin/">
+              <span class="glyphicon glyphicon-log-in"></span> Login
+            </a>
+          </li>
+          {% endif %}
         </ul>
       </div>
     </div>

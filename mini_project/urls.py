@@ -11,6 +11,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path('signup/', views.signup),
+    path('signin/', views.signin),
+    path('signout/', views.signout),
     path('food/', views.food),
     path('stay/', views.stay),
     path('festival/', views.festival),
