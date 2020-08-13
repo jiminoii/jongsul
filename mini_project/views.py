@@ -4,9 +4,25 @@ from food.models import Food_Inpo
 from exp.models import Inpo
 import requests
 from bs4 import BeautifulSoup as bs
+from user.models import User
 
 def index(request):
     return render(request, 'index.html')
+
+
+
+def signup(request):
+    if request.method == 'POST':
+        # 회원정보 저장
+        id1 = request.POST.get('id1')
+        name = request.POST.get('name')
+        pwd = request.POST.get('pwd')
+        users = User(id1=id1, name=name, pwd=pwd)
+        users.save()
+        return HttpResponseRedirect('/index/')
+    return render(request, 'signup.html')
+
+
 
 def food(request):
     # food_point = Food_Inpo.objects.order_by('id')
@@ -44,24 +60,73 @@ def food(request):
 
 def exp(request):
     info_list = Inpo.objects.order_by('id')
+
     address = 'https://www.tourandong.com/public/sub2/sub4.cshtml'
     res = requests.get(address)
     res.encoding = None
-    stra =""
-    strb =""
+    stra ="<table class='table table-hover'><thead><tr><th style='text-align: center;'>상호명</th><th style='text-align: center;'>주소</th><th style='text-align: center;'>전화번호</th></tr></thead>"
+    i=0
     parse = bs(res.text, 'html.parser')
     a_list = parse.select('#contentDiv a p')
+    a_list2 = parse.select('.tour_course_thum strong')
     for a in a_list:
+        stra+="<tr>"
+        stra+="<td>"+ a_list2[i].text + "</td>"
+        i+=1
         if a.text.find('전화') != -1:
-            stra += (a.text)[5:a.text.find('전화')]+'<br/>'
-            strb += (a.text)[a.text.find('전화')+5:]+'<br/>'
+            stra += '<td>'+(a.text)[5:a.text.find('전화')]+'</td>'
+            stra += '<td>'+(a.text)[a.text.find('전화')+5:-6]+'</td>'
         else:
-            stra += (a.text)[5:-6]+'<br/>'
+            stra += '<td>'+(a.text)[5:-6]+'</td><td></td>'
+        stra+="</tr>"
+    stra+="</table>"
+
+    address2 = 'https://www.tourandong.com/public/sub2/sub5.cshtml'
+    res = requests.get(address2)
+    res.encoding = None
+    strb ="<table class='table table-hover'><thead><tr><th style='text-align: center;'>상호명</th><th style='text-align: center;'>주소</th><th style='text-align: center;'>전화번호</th></tr></thead>"
+    i=0
+    parse = bs(res.text, 'html.parser')
+    a_list = parse.select('#contentDiv a p')
+    a_list2 = parse.select('.tour_course_thum strong')
+    for a in a_list:
+        strb+="<tr>"
+        strb+="<td>"+ a_list2[i].text + "</td>"
+        i+=1
+        if a.text.find('전화') != -1:
+            strb += '<td>'+(a.text)[5:a.text.find('전화')]+'</td>'
+            strb += '<td>'+(a.text)[a.text.find('전화')+5:-6]+'</td>'
+        else:
+            strb += '<td>'+(a.text)[5:-6]+'</td><td></td>'
+        strb+="</tr>"
+    strb+="</table>"
+
+    address3 = 'https://www.tourandong.com/public/sub2/sub6.cshtml'
+    res = requests.get(address3)
+    res.encoding = None
+    strc ="<table class='table table-hover'><thead><tr><th style='text-align: center;'>상호명</th><th style='text-align: center;'>개화시기</th><th style='text-align: center;'>주변관광지</th></tr></thead>"
+    i=0
+    parse = bs(res.text, 'html.parser')
+    a_list = parse.select('.flower_spot ul li')
+    a_list2 = parse.select('.flower_spot dt')
+    for a in a_list2:
+        strc+="<tr>"
+        strc+="<td>"+ a.text + "</td>"
+        strc += '<td>'+(a_list[i].text)[6:]+'</td>'
+        strc += '<td>'+(a_list[i+1].text)[7:]+'</td>'
+        i+=2
+        strc+="</tr>"
+    strc+="</table>"
+
+
+
     aa = {
-        'contact' : stra,
-        'contact1' : strb,
         'gg' : info_list,
+        'contact' : stra,
+        'contact2' : strb,
+        'contact3' : strc,
     }
+    
     return render(request, 'exp.html', aa)
     
 
