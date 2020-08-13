@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="kr">
+
 <head>
   <title>Trabit</title>
   <meta charset="utf-8">
@@ -7,202 +8,217 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-    *{
-    margin: 0;
-    padding: 0;
-    font-family: 'lato';
-    list-style: none;
-    text-decoration: none;
+
+  <!--스크립트 추가-->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+  <script type="text/javascript">
+    function scroll_follow(id) {
+      $(window).scroll(function ()  //스크롤이 움직일때마다 이벤트를 발생시키고
+      {
+        var position = $(window).scrollTop(); // 현재 스크롤바의 위치값을 반환합니다.
+        $(id).stop().animate({ top: position + "px" }, 1); //해당 오브젝트 위치값 재설정
+      });
     }
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    scroll_follow("#scroll");
+    //스크롤이 생기도록 <br> 을 여러개 넣은 부분..
+    $(document).ready(function () { for (var i = 0; i < 200; i++) { $('#brr').html($('#brr').html() + "<br>" + i); } });
+  </script>
+
+  <!--CSS-->
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
       margin-bottom: 0;
       border-radius: 0;
     }
-    
-    /* Add a gray background color and some padding to the footer */
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {
+      height: 450px
+    }
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
     footer {
-      background-color: #f2f2f2;
-      padding: 25px;
+      background-color: #555;
+      color: white;
+      padding: 15px;
     }
-    
-  .carousel-inner img {
-      width: 100%; /* Set width to 100% */
-      margin: auto;
-      min-height:200px;
-  }
 
-  /* Hide the carousel text when the screen is less than 600 pixels wide */
-  @media (max-width: 600px) {
-    .carousel-caption {
-      display: none; 
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+
+      .row.content {
+        height: auto;
+      }
     }
-  }
 
-/*세로드롭다운메뉴*/
-.wrapper{
-    position: absolute;
-    width: 85%;
-    top: 20px;
-    padding-left: 10px;
-}
-.mainMenu{
-    width: 100%;
-    display: block;
-    border-radius: 10px;
-    overflow: hidden;
-}
-.item{
-    border-top: 1px solid ;
-    overflow: hidden;
-}
-.btn{
-    display: block;
-    padding: 15px 20px;
-    background-color: black;
-    color: #fff;
-    position: relative;
+    /* Accordion styles */
+    input {
+      position: absolute;
+      opacity: 0;
+      z-index: -1;
+    }
 
-}
-.btn:before{
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right:8px solid transparent;
-    border-top:10px solid #ff6f61;
-    right: 15px;
-    bottom: -10px;
-    z-index: 9;
-    
-}
-.btn i {
-    margin-right: 10px;
-}
-.subMenu{
-    background: lightgray;
-    overflow: hidden;
-    transition: max-height 0.7s;
-    max-height: 0;
-}
-.subMenu a{
-    display: block;
-    padding: 15px 20px;
-    color: #394c7f;
-    font-size: 14px;
-    border-bottom: 1px solid #394c7f;
-    position: relative;
-    
-}
-.subMenu a:before{
-    content: '';
-    opacity: 0;
-    transition: opacity 0.3s;
+    .tabs {
 
-}
-.subMenu a:hover:before{
-    content: '';
-    position: absolute;
-    height: 0;
-    width: 6px;
-    left: 0;
-    top:0;
-    opacity: 1;
-    /* background-color: #d8d824; */
-    border-top: 24px solid transparent;
-    border-left: 11px solid #fcdc29;
-    border-bottom: 24px solid transparent;
-}
-.subMenu a:after{
-    content: '';
-    opacity: 0;
-    transition: opacity 0.3s;
+      top: 100px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.5);
+    }
 
-}
-.subMenu a:hover:after{
-    content: '';
-    position: absolute;
-    height: 0;
-    width: 6px;
-    right: 0px;
-    top:0;
-    opacity: 1;
-    /* background-color: #d8d824; */
-    border-top: 24px solid transparent;
-    border-right: 11px solid #fcdc29;
-    border-bottom: 24px solid transparent;
-}
-.subMenu a:hover{
-    background: #273057;
-    background: -moz-linear-gradient(top, #273057 0%, #273057 50%, #394c7f 51%, #394c7f 100%);
-    background: -webkit-linear-gradient(top, #273057 0%,#273057 50%,#394c7f 51%,#394c7f 100%);
-    background: linear-gradient(to bottom, #273057 0%,#273057 50%,#394c7f 51%,#394c7f 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#273057', endColorstr='#394c7f',GradientType=0 );
-    transition: all 0.3s;
-    border-bottom: 1px solid #394c7f;
-}
-.subMenu a:last-child{
-    border:none;
-}
-.item:target .subMenu{
-    max-height: 10em;
-}
+    .tab {
+      width: 100%;
+      color: white;
+      overflow: hidden;
+    }
 
-.Contents{
-  background-color: white;
-  width: 100%;
-  height: auto;
-  left: 0;
-  right: 0;
-  margin: 30px auto;
-}
-.img-source{
-  width: 100%;
-  margin: 0 auto;
-}
-.text-source{
-  width: 100%;
-  margin: 0 auto;
-  padding-bottom: 20px;
-  background-color: thistle;
-}
+    .tab-label {
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-pack: justify;
+      justify-content: space-between;
+      padding: 1em;
+      background: #2c3e50;
+      font-weight: bold;
+      cursor: pointer;
+      /* Icon */
+    }
+
+    .tab-label:hover {
+      background: #1a252f;
+    }
+
+    .tab-label::after {
+      content: "\276F";
+      width: 1em;
+      height: 1em;
+      text-align: center;
+      -webkit-transition: all .35s;
+      transition: all .35s;
+    }
+
+    .tab-content {
+      max-height: 0;
+      padding: 0 1em;
+      color: #2c3e50;
+      background: white;
+      -webkit-transition: all .35s;
+      transition: all .35s;
+      font-size: 100%;
+    }
+
+    .tab-close {
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-pack: end;
+      justify-content: flex-end;
+      padding: 1em;
+      font-size: 0.75em;
+      background: #2c3e50;
+      cursor: pointer;
+    }
+
+    .tab-close:hover {
+      background: #1a252f;
+    }
+
+    input:checked+.tab-label {
+      background: #1a252f;
+    }
+
+    input:checked+.tab-label::after {
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+
+    input:checked~.tab-content {
+      max-height: 100vh;
+      padding: 1em;
+    }
+
+    /* 하위메뉴 */
+    .tab-content ul {
+      width: 100%;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+
+    }
+
+    .tab-content ul li {
+      display: inline-block;
+      text-align: left;
+    }
+
+    .dropdown-content {
+      position: relative;
+      background-color: #f9f9f9;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+      color: deeppink;
+    }
   </style>
 </head>
+
+
 <body>
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="/">Trabit</a>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#" style="padding-top: 5px;"><img src='https://ifh.cc/g/raZeN4.png' border='0'
+            style="height: 40px;"></a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="/food/">Local food</a></li>
+          <li><a href="/festival/">festival</a></li>
+          <li><a href="/stay/">stay</a></li>
+          <li><a href="/exp/">travel</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/">Home</a></li>
-        <li><a href="/food/">local food</a></li>
-        <li><a href="/festival/">festival</a></li>
-        <li><a href="/stay/">stay</a></li>
-        <li><a href="/exp/">travel</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+  </nav>
+  {% block content %}
+  {% endblock %}
 
-{% block content %}
-{% endblock %}
-
-<footer class="container-fluid text-center">
-  <p>Footer Text</p>
-</footer>
-
+  <footer class="container-fluid text-center">
+    <p>Footer Text</p>
+  </footer>
 </body>
+
 </html>
