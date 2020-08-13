@@ -124,11 +124,14 @@ def exp(request):
     res = requests.get(address2)
     res.encoding = None
     strb ="<table class='table table-hover'><thead><tr><th style='text-align: center;'>상호명</th><th style='text-align: center;'>주소</th><th style='text-align: center;'>전화번호</th></tr></thead>"
+    
     i=0
     parse = bs(res.text, 'html.parser')
     a_list = parse.select('#contentDiv a p')
     a_list2 = parse.select('.tour_course_thum strong')
+    loc_list1=[]
     for a in a_list:
+        obj={}
         strb+="<tr>"
         strb+="<td>"+ a_list2[i].text + "</td>"
         i+=1
@@ -136,10 +139,23 @@ def exp(request):
             strb += '<td>'+(a.text)[5:a.text.find('전화')]+'</td>'
             juso=(a.text)[5:a.text.find('전화')]
             strb += '<td>'+(a.text)[a.text.find('전화')+5:-6]+'</td>'
+            tel=(a.text)[a.text.find('전화')+5:-7]
         else:
             strb += '<td>'+(a.text)[5:-6]+'</td><td></td>'
             juso=(a.text)[5:-6]
         strb+="</tr>"
+        urla=" https://maps.googleapis.com/maps/api/geocode/json?address="+juso+"&key=AIzaSyBiulBepetV6p2prBzpL-K7ss2-b_xP5NU"
+        res = requests.get(urla)
+        parse=res.json()
+        ress=parse['results']
+        geo=ress[0].get('geometry')
+        loc=geo['location']
+        lat=loc.get('lat')
+        lng=loc.get('lng')
+        obj['lat'] = lat
+        obj['lng'] = lng
+        obj['tel'] = tel
+        loc_list1.append(obj)
     strb+="</table>"
 
     address3 = 'https://www.tourandong.com/public/sub2/sub6.cshtml'
@@ -166,7 +182,8 @@ def exp(request):
         'contact' : stra,
         'contact2' : strb,
         'contact3' : strc,
-        'loc_contact':loc_list
+        'loc_contact':loc_list,
+        'loc_contact1':loc_list1,
     }
     
     return render(request, 'exp.html', aa)
