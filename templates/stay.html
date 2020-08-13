@@ -7,12 +7,48 @@
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fe4fe669c0e29292e13e253ea4ca331f"></script>
 <div class="container-fluid text-center">
+  
   <div class="row content">
     <div class="col-sm-2 sidenav">
-      <p><a href="#stay1">전통가옥</a></p>
-      <p><a href="#stay2">호텔/모텔</a></p>
-      <p><a href="#stay3">휴양림/수련원/농촌체험마을</a></p>
-      <p><a href="#stay4">기타숙박</a></p>
+      <div id="scroll" style="position:absolute; margin-top: 20px; left: 20px; right:  20px;">
+        <div class="tabs">
+          <div class="tab">
+            <input type="checkbox" id="chck1">
+            <label class="tab-label" for="chck1">음식</label>
+            <div class="tab-content">
+              <ul>
+                <li class="dropdown" style="width: 100%">
+                  <div class="dropdown-content">
+                    <a href="/food/#food1">안동간고등어</a>
+                    <a href="/food/#food2">헛제사밥</a>
+                    <a href="/food/#food3">안동찜닭</a>
+                    <a href="/food/#food4">안동한우</a>
+                    <a href="/food/#food5">안동칼국수</a>
+                    <a href="/food/#food6">안동잉어찜</a>
+                    <a href="/food/#food7">안동매운탕</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="tab">
+            <input type="checkbox" id="chck2">
+            <label class="tab-label" for="chck2">숙박</label>
+            <div class="tab-content">
+              <ul>
+                <li class="dropdown" style="width: 100%">
+                  <div class="dropdown-content">
+                    <a href="#stay1">전통가옥</a>
+                    <a href="#stay2">호텔/모텔</a>
+                    <a href="#stay3">휴양림/수련원/농촌체험마을</a>
+                    <a href="#stay4">기타숙박</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-sm-8 text-left">
       <h1>숙박</h1>
@@ -21,7 +57,7 @@
       <h3 id="stay1">전통가옥</h3>
       <p>심신을 편안하게 쉬러 오세요.</p>
       <div class="jumbotron">
-        <div id="map" style="width:500px;height:400px;"></div>
+        <div id="map" style="width:100%;height:600px;"></div>
         {{contact|safe}}
       </div>
       <hr>
@@ -59,7 +95,7 @@
   var map = new kakao.maps.Map(container, options);
   var positions = [
     {
-        content: '<div>카카오</div><div>010-2556-2555</div>', 
+        content: "<div>{{asdf}}</div><div>010-2556-2555</div>", 
         latlng: new kakao.maps.LatLng(33.450705, 126.570677)
     },
     {
@@ -108,35 +144,5 @@ function makeOutListener(infowindow) {
         infowindow.close();
     };
 }
-
-/* 아래와 같이도 할 수 있습니다 */
-/*
-for (var i = 0; i < positions.length; i ++) {
-    // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({
-        map: map, // 마커를 표시할 지도
-        position: positions[i].latlng // 마커의 위치
-    });
-
-    // 마커에 표시할 인포윈도우를 생성합니다 
-    var infowindow = new kakao.maps.InfoWindow({
-        content: positions[i].content // 인포윈도우에 표시할 내용
-    });
-
-    // 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듭니다
-    // 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-    (function(marker, infowindow) {
-        // 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시합니다 
-        kakao.maps.event.addListener(marker, 'mouseover', function() {
-            infowindow.open(map, marker);
-        });
-
-        // 마커에 mouseout 이벤트를 등록하고 마우스 아웃 시 인포윈도우를 닫습니다
-        kakao.maps.event.addListener(marker, 'mouseout', function() {
-            infowindow.close();
-        });
-    })(marker, infowindow);
-}
-*/
 </script>
 {% endblock %}
