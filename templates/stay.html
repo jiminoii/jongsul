@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 <style>
-  th{
+  th {
     text-align: center;
   }
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fe4fe669c0e29292e13e253ea4ca331f"></script>
 <div class="container-fluid text-center">
-  
+
   <div class="row content">
     <div class="col-sm-2 sidenav">
       <div id="scroll" style="position:absolute; margin-top: 20px; left: 20px; right:  20px;">
@@ -52,28 +52,37 @@
     </div>
     <div class="col-sm-8 text-left">
       <h1>숙박</h1>
-      <p>안동에서 편안하고 안전한 숙박을 즐기는 방법에는 여러가지 방법이 있다. 전통가옥, 호텔, 테마 게스트하우스같은 아름다운 숙박시설을 소개 시켜주는 페이지다.</p>
+      <p>안동에서 편안하고 안전한 숙박을 즐기는 방법에는 여러가지 방법이 있다. 전통가옥, 호텔, 테마 게스트하우스같은 아름다운 숙박시설을 소개 시켜주는 페이지입니다.</p>
       <hr>
       <h3 id="stay1">전통가옥</h3>
       <p>심신을 편안하게 쉬러 오세요.</p>
       <div class="jumbotron">
         <div id="map" style="width:100%;height:600px;"></div>
         {{contact|safe}}
+        {{contact4|safe}}
       </div>
       <hr>
       <h3 id="stay2">호텔/모텔</h3>
       <p>우수업소 및 호텔모텔안내입니다.</p>
-      {{contact1|safe}}
-      {{contact4|safe}}
+      <div class="jumbotron">
+        <div id="map1" style="width:100%;height:600px;"></div>
+        {{contact1|safe}}
+        {{contact5|safe}}
+      </div>
       <hr>
       <h3 id="stay3">휴양림/수련원/농촌체험마을</h3>
       <p>휴양림, 농촌휴양마을 등을 안내합니다.</p>
-      {{contact2|safe}}
-      {{contact5|safe}}
+      <div class="jumbotron">
+        <div id="map2" style="width:100%;height:600px;"></div>
+        {{contact2|safe}}
+      </div>>
       <hr>
       <h3 id="stay4">기타숙박</h3>
       <p>게스트하우스, 펜션 등은 소개합니다.</p>
-      {{contact3|safe}}
+      <div class="jumbotron">
+        <div id="map3" style="width:100%;height:600px;"></div>
+        {{contact3|safe}}
+      </div>
     </div>
     <div class="col-sm-2 sidenav">
       <div class="well">
@@ -87,19 +96,51 @@
 </div>
 <script>
   var container = document.getElementById('map');
+  var container1 = document.getElementById('map1');
+  var container2 = document.getElementById('map2');
+  var container3 = document.getElementById('map3');
+
   var options = {
     center: new kakao.maps.LatLng(36.565269, 128.724538),
     level: 10
   };
 
   var map = new kakao.maps.Map(container, options);
+  var map1 = new kakao.maps.Map(container1, options);
+  var map2 = new kakao.maps.Map(container2, options);
+  var map3 = new kakao.maps.Map(container3, options);
+
   var positions = [
-    {% for d in data%}
-    {
-        content: "<div>{{d.place}}</div><div>{{d.tel}}</div>", 
-        latlng: new kakao.maps.LatLng({{d.latlan}})
+    {% for d in data %}
+  {
+    content: "<div>{{d.place}}</div><div>{{d.tel}}</div>",
+      latlng: new kakao.maps.LatLng({{ d.latlan }})
     },
-    {% endfor %}
+  {% endfor %}
+];
+var positions1 = [
+    {% for d in data1 %}
+  {
+    content: "<div>{{d.place}}</div><div>{{d.tel}}</div>",
+      latlng: new kakao.maps.LatLng({{ d.latlan }})
+    },
+  {% endfor %}
+];
+var positions2 = [
+    {% for d in data2 %}
+  {
+    content: "<div>{{d.place}}</div><div>{{d.tel}}</div>",
+      latlng: new kakao.maps.LatLng({{ d.latlan }})
+    },
+  {% endfor %}
+];
+var positions3 = [
+    {% for d in data3 %}
+  {
+    content: "<div>{{d.place}}</div><div>{{d.tel}}</div>",
+      latlng: new kakao.maps.LatLng({{ d.latlan }})
+    },
+  {% endfor %}
 ];
 
 for (var i = 0; i < positions.length; i ++) {
@@ -121,18 +162,75 @@ for (var i = 0; i < positions.length; i ++) {
     kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 }
 
-// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
-function makeOverListener(map, marker, infowindow) {
-    return function() {
-        infowindow.open(map, marker);
-    };
-}
+for (var i = 0; i < positions1.length; i++) {
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+      map: map1, // 마커를 표시할 지도
+      position: positions1[i].latlng // 마커의 위치
+    });
 
-// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
-function makeOutListener(infowindow) {
-    return function() {
-        infowindow.close();
+    // 마커에 표시할 인포윈도우를 생성합니다 
+    var infowindow = new kakao.maps.InfoWindow({
+      content: positions1[i].content // 인포윈도우에 표시할 내용
+    });
+
+    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map1, marker, infowindow));
+    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+  }
+  
+
+  for (var i = 0; i < positions2.length; i++) {
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+      map: map2, // 마커를 표시할 지도
+      position: positions2[i].latlng // 마커의 위치
+    });
+
+    // 마커에 표시할 인포윈도우를 생성합니다 
+    var infowindow = new kakao.maps.InfoWindow({
+      content: positions2[i].content // 인포윈도우에 표시할 내용
+    });
+
+    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map2, marker, infowindow));
+    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+  }
+  for (var i = 0; i < positions3.length; i++) {
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+      map: map3, // 마커를 표시할 지도
+      position: positions3[i].latlng // 마커의 위치
+    });
+
+    // 마커에 표시할 인포윈도우를 생성합니다 
+    var infowindow = new kakao.maps.InfoWindow({
+      content: positions3[i].content // 인포윈도우에 표시할 내용
+    });
+
+    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map3, marker, infowindow));
+    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+  }
+
+  // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+  function makeOverListener(map, marker, infowindow) {
+    return function () {
+      infowindow.open(map, marker);
     };
-}
+  }
+
+  // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+  function makeOutListener(infowindow) {
+    return function () {
+      infowindow.close();
+    };
+  }
 </script>
 {% endblock %}
