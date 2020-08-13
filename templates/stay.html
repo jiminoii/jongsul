@@ -89,27 +89,17 @@
   var container = document.getElementById('map');
   var options = {
     center: new kakao.maps.LatLng(36.565269, 128.724538),
-    level: 6
+    level: 10
   };
 
   var map = new kakao.maps.Map(container, options);
   var positions = [
+    {% for d in data%}
     {
-        content: "<div>{{asdf}}</div><div>010-2556-2555</div>", 
-        latlng: new kakao.maps.LatLng(33.450705, 126.570677)
+        content: "<div>{{d.place}}</div><div>{{d.tel}}</div>", 
+        latlng: new kakao.maps.LatLng({{d.latlan}})
     },
-    {
-        content: '<div>생태연못</div>', 
-        latlng: new kakao.maps.LatLng(33.450936, 126.569477)
-    },
-    {
-        content: '<div>텃밭</div>', 
-        latlng: new kakao.maps.LatLng(33.450879, 126.569940)
-    },
-    {
-        content: '<div>근린공원</div>',
-        latlng: new kakao.maps.LatLng(33.451393, 126.570738)
-    }
+    {% endfor %}
 ];
 
 for (var i = 0; i < positions.length; i ++) {

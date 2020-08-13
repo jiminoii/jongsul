@@ -124,7 +124,25 @@ def stay(request):
     result = result.text
     s_table = 0
     e_table = 0
-    star = ""
+    star = ''
+    parse = bs(result,'html.parser')
+    latlngs = parse.select('tbody tr')
+    tds = parse.select('tbody td')
+    i = 0
+    data = []
+    for latlan in latlngs:
+        obj = {}
+        obj['latlan'] = latlan['data-map']
+        if tds[i*4].text.find('\n') == -1:
+            obj['place'] = tds[i*4].text
+        else:
+            obj['place'] = tds[i*4].text[:tds[i*4].text.find('\n')-1]+tds[i*4].text[tds[i*4].text.find('\n')+1:]
+        if tds[i*4+2].text.find('\n') == -1:
+            obj['tel'] = tds[i*4+2].text
+        else:
+            obj['tel'] = tds[i*4+2].text[:tds[i*4+2].text.find('\n')-1]
+        i+=1
+        data.append(obj)
     while True:
         s_table = result.find('<table',e_table)
         s_table = result.find('>',s_table)
@@ -204,5 +222,6 @@ def stay(request):
         'contact3' : star3,
         'contact4' : star4,
         'contact5' : star5,
+        'data' : data
     }
     return render(request, 'stay.html',r_ta)
