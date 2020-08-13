@@ -24,6 +24,11 @@
     $(document).ready(function () { for (var i = 0; i < 200; i++) { $('#brr').html($('#brr').html() + "<br>" + i); } });
   </script>
 
+  <script>
+    $(document).ready(function(){
+  $('.slider').slider();
+});
+  </script>
   <!--CSS-->
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
@@ -183,6 +188,31 @@
       background-color: #f1f1f1;
       color: deeppink;
     }
+
+/*이미지 슬라이드*/
+  ul,li{list-style:none; padding: 0;}
+  #imgslide{width:100%;height:300px;position:relative;overflow:hidden; margin: 0 auto; box-shadow: 4px 4px 4px lightgray; }
+  .imgslidetext{font-weight: bold; font-size: 10pt; color:white;} 
+	#imgslide ul{width:400%;height:100%;transition:1s;}
+	#imgslide ul:after{content:"";display:block;clear:both;}
+	#imgslide li{float:left;width:25%;height:100%;}
+	#imgslide li:nth-child(1){background:#faa;}
+	#imgslide li:nth-child(2){background:#ffa;}
+	#imgslide li:nth-child(3){background:#faF;}
+	#imgslide li:nth-child(4){background:#aaf;}
+	#imgslide input{display:none;}
+	#imgslide label{display:inline-block;vertical-align:middle;width:10px;height:10px;border:2px solid white;transition:0.3s;border-radius:50%;cursor:pointer;}
+	#imgslide .text-1{position: absolute; font-weight: bold; color: white; font-size: 15pt; text-shadow: 2px 2px 2px gray; margin: 20px 20px;}
+  #imgslide .text-2{position: absolute; color: white; font-size: 8.5pt; text-shadow: 2px 2px 2px gray; margin: 50px 20px; line-height:1.5em}
+  #imgslide .pos{text-align:center;position:absolute; bottom:10px; left:0; width:100%; text-align:center;}
+  #pos1:checked~ul{margin-left:0%;}
+	#pos2:checked~ul{margin-left:-100%;}
+	#pos3:checked~ul{margin-left:-200%;}
+	#pos4:checked~ul{margin-left:-300%;}
+	#pos1:checked~.pos>label:nth-child(1){background:white;}
+	#pos2:checked~.pos>label:nth-child(2){background:white;}
+	#pos3:checked~.pos>label:nth-child(3){background:white;}
+	#pos4:checked~.pos>label:nth-child(4){background:white;}
   </style>
 </head>
 
@@ -206,7 +236,7 @@
           <li><a href="/festival/">festival</a></li>
           <li><a href="/stay/">stay</a></li>
           <li><a href="/exp/">travel</a></li>
-          <li><a href="/user/list/">Community</a></li>
+          <li><a href="/commu/list/">Community</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {% if request.session.id1 %}
@@ -230,7 +260,11 @@
   {% endblock %}
 
   <footer class="container-fluid text-center">
-    <p>Footer Text</p>
+    <p>Kim jimin  /  
+      Tae ChoiUk  /  
+      Lee DongHee  /  
+      Lee miso
+    </p>
   </footer>
 </body>
 

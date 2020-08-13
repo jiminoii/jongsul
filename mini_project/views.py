@@ -5,7 +5,7 @@ from exp.models import Inpo
 import requests
 from bs4 import BeautifulSoup as bs
 from user.models import User
-
+from user.models import Board
 def index(request):
     return render(request, 'index.html')
 
@@ -352,6 +352,15 @@ def stay(request):
     }
     return render(request, 'stay.html',r_ta)
 
+def festival2(request):
+    return render(request, 'festival2.html')
+
+def festival3(request):
+    return render(request, 'festival3.html')
+
+def festival4(request):
+    return render(request, 'festival4.html')
+
 def community(request):
     return render(request, 'community.html')
 
@@ -359,23 +368,32 @@ def write(request):
     if request.method == 'POST':
         title = request.POST.get('title')
         content = request.POST.get('content')
-        try:
-            email = request.session['email']
-            # select * from user where email = ?
-            user = User.objects.get(email=email)
-            # insert into article (title, content, user_id) values (?, ?, ?)
-            article = Article(title=title, content=content, user=user)
-            article.save()
-            return render(request, 'commu_success.html')
-        except:
-            return render(request, 'commu_fail.html')
+        # try:
+        id1 = request.session['id1']
+        # # select * from user where email = ?
+        user = User.objects.get(id1=id1)
+        # insert into article (title, content, user_id) values (?, ?, ?)
+        board = Board(title=title, content=content, id1=user)
+        board.save()
+        return render(request, 'commu_success.html')
+        # except:
+        #     return render(request, 'commu_fail.html')
 
     return render(request, 'commu_write.html')
 
 def list(request):
 
-    user_list = user.objects.order_by('id')
+    commu_list = Board.objects.order_by('id')
     context = {
-        'user_list' : user_list
+        'commu_list' : commu_list
     }
-    return render(request, '/user/list.html', context)
+    return render(request, 'commu_list.html', context)
+
+def detail(request, id):
+    # select * from article where id = ?
+    board = Board.objects.get(id=id)
+    context = {
+        'board' : board
+    }
+
+    return render(request, 'detail.html', context)

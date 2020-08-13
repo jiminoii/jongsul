@@ -16,12 +16,20 @@ urlpatterns = [
     path('food/', views.food),
     path('stay/', views.stay),
     path('festival/', views.festival),
+    path('festival2/', views.festival2),
+    path('festival3/', views.festival3),
+    path('festival4/', views.festival4),
     path('exp/', views.exp),
     path('expmap_data/', views2.expmap_data),
     path('foodmap_data/', views4.foodmap_data),
     path('fes_map/', views3.map_data),
-    path('commu_write/', views.write),
-    path('user/list/', views.write),
+    path('commu/write/', views.write),
+    path('commu/list/', views.list),
+    path('commu/success/', views.write),
+    path('commu/fail/', views.write),
+    path('user/list', views.list),
+    path('commu/detail/<int:id>/', views.detail),
+
 
 
 ]
