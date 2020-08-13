@@ -25,15 +25,15 @@ def signup(request):
 def signin(request):
     if request.method == 'POST':
     # 회원정보 조회
-        email = request.POST.get('email')
+        id1 = request.POST.get('id1')
         pwd = request.POST.get('pwd')
-    try:
-    # select * from user where email=? and pwd=?
-        user = User.objects.get(email=email, pwd=pwd)
-        request.session['id1'] = id1
-        return render(request, 'signin_success.html')
-    except:
-        return render(request, 'signin_fail.html')
+        try:
+        # select * from user where email=? and pwd=?
+            user = User.objects.get(id1=id1, pwd=pwd)
+            request.session['id1'] = id1
+            return render(request, 'signin_success.html')
+        except:
+            return render(request, 'signin_fail.html')
     return render(request, 'signin.html')
 
 

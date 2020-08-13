@@ -208,11 +208,10 @@
           <li><a href="/exp/">travel</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          {% if request.session.email %}
+          {% if request.session.id1 %}
           <li>
             <a href="/signout/">
-              <span class="glyphicon glyphicon-log-out"></span> Logout
-              {{ request.session.email }} 님 반갑습니다.
+              <span class="glyphicon glyphicon-log-out"></span> Logout {{ request.session.id1 }} 님 반갑습니다.
             </a>
           </li>
           {% else %}
