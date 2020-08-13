@@ -38,10 +38,42 @@
               <ul>
                 <li class="dropdown" style="width: 100%">
                   <div class="dropdown-content">
-                    <a href="#stay1">전통가옥</a>
-                    <a href="#stay2">호텔/모텔</a>
-                    <a href="#stay3">휴양림/수련원/농촌체험마을</a>
-                    <a href="#stay4">기타숙박</a>
+                    <a href="/stay/#stay1">전통가옥</a>
+                    <a href="/stay/#stay2">호텔/모텔</a>
+                    <a href="/stay/#stay3">휴양림/수련원/농촌체험마을</a>
+                    <a href="/stay/#stay4">기타숙박</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="tab">
+            <input type="checkbox" id="chck3">
+            <label class="tab-label" for="chck3">체험</label>
+            <div class="tab-content">
+              <ul>
+                <li class="dropdown" style="width: 100%">
+                  <div class="dropdown-content">
+                    <a href="/exp/#exp1">전통공예체험</a>
+                    <a href="/exp/#exp2">레포츠체험</a>
+                    <a href="/exp/#exp3">농촌체험</a>
+                    <a href="/exp/#exp4">꽃여행</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="tab">
+            <input type="checkbox" id="chck4">
+            <label class="tab-label" for="chck4">축제</label>
+            <div class="tab-content">
+              <ul>
+                <li class="dropdown" style="width: 100%">
+                  <div class="dropdown-content">
+                    <a href="/exp/#exp1">안동국제탈춤페스티벌</a>
+                    <a href="/exp/#exp2">월영여행</a>
+                    <a href="/exp/#exp3">암산얼음축제</a>
+                    <a href="/exp/#exp4">안동벚꽃축제</a>
                   </div>
                 </li>
               </ul>
@@ -104,11 +136,23 @@
     center: new kakao.maps.LatLng(36.565269, 128.724538),
     level: 10
   };
+  var options1 = {
+    center: new kakao.maps.LatLng(36.565269, 128.724538),
+    level: 8
+  };
+  var options2 = {
+    center: new kakao.maps.LatLng(36.565269, 128.724538),
+    level: 10
+  };
+  var options3 = {
+    center: new kakao.maps.LatLng(36.565269, 128.724538),
+    level: 9
+  };
 
   var map = new kakao.maps.Map(container, options);
-  var map1 = new kakao.maps.Map(container1, options);
-  var map2 = new kakao.maps.Map(container2, options);
-  var map3 = new kakao.maps.Map(container3, options);
+  var map1 = new kakao.maps.Map(container1, options1);
+  var map2 = new kakao.maps.Map(container2, options2);
+  var map3 = new kakao.maps.Map(container3, options3);
 
   var positions = [
     {% for d in data %}
