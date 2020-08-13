@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="jumbotron" style="width:auto; height:615px;">
+    <div class="container text-center">
+        <form method="post" action="/signup/">
+            {% csrf_token %}
+            <div class="form-group row">
+                <label for="email" class="col-sm-1 control-label">ID:</label>
+                <div class="col-sm-10">
+                <input type="text" class="form-control" id="email" name="email" style="z-index:1;position:relative;display:inline-block; opacity: 1;">
+                </div>
+            </div>
+            <br/>
+            <div class="form-group row">
+                <label for="pwd" class="col-sm-1 control-label">PW:</label>
+                <div class="col-sm-10">
+                <input type="password" class="form-control" id="pwd" name="pwd" style="z-index:1;position:relative;display:inline-block; opacity: 1;">
+                </div>
+            </div>
+            <br/>
+            <div class="form-group row">
+                <label for="name" class="col-sm-1 control-label">Name:</label>
+                <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" name="name" style="z-index:1;position:relative;display:inline-block; opacity: 1;">
+                </div>
+            </div>
+            <br/>
+            <button class="btn btn-primary btn-block" id="signup">Sign Up</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
