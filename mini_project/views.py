@@ -88,17 +88,37 @@ def exp(request):
     parse = bs(res.text, 'html.parser')
     a_list = parse.select('#contentDiv a p')
     a_list2 = parse.select('.tour_course_thum strong')
+    loc_list=[]
+    tel=""
     for a in a_list:
+        obj={}
         stra+="<tr>"
         stra+="<td>"+ a_list2[i].text + "</td>"
         i+=1
         if a.text.find('전화') != -1:
             stra += '<td>'+(a.text)[5:a.text.find('전화')]+'</td>'
+            juso=(a.text)[5:a.text.find('전화')]
             stra += '<td>'+(a.text)[a.text.find('전화')+5:-6]+'</td>'
+            tel=(a.text)[a.text.find('전화')+5:-7]
         else:
             stra += '<td>'+(a.text)[5:-6]+'</td><td></td>'
+            juso=(a.text)[5:-6]
         stra+="</tr>"
+        urla=" https://maps.googleapis.com/maps/api/geocode/json?address="+juso+"&key=AIzaSyBiulBepetV6p2prBzpL-K7ss2-b_xP5NU"
+        res = requests.get(urla)
+        parse=res.json()
+        ress=parse['results']
+        geo=ress[0].get('geometry')
+        loc=geo['location']
+        lat=loc.get('lat')
+        lng=loc.get('lng')
+        obj['lat'] = lat
+        obj['lng'] = lng
+        obj['tel'] = tel
+        loc_list.append(obj)
+
     stra+="</table>"
+    
 
     address2 = 'https://www.tourandong.com/public/sub2/sub5.cshtml'
     res = requests.get(address2)
@@ -114,9 +134,11 @@ def exp(request):
         i+=1
         if a.text.find('전화') != -1:
             strb += '<td>'+(a.text)[5:a.text.find('전화')]+'</td>'
+            juso=(a.text)[5:a.text.find('전화')]
             strb += '<td>'+(a.text)[a.text.find('전화')+5:-6]+'</td>'
         else:
             strb += '<td>'+(a.text)[5:-6]+'</td><td></td>'
+            juso=(a.text)[5:-6]
         strb+="</tr>"
     strb+="</table>"
 
@@ -144,6 +166,7 @@ def exp(request):
         'contact' : stra,
         'contact2' : strb,
         'contact3' : strc,
+        'loc_contact':loc_list
     }
     
     return render(request, 'exp.html', aa)
