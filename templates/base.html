@@ -24,6 +24,11 @@
     $(document).ready(function () { for (var i = 0; i < 200; i++) { $('#brr').html($('#brr').html() + "<br>" + i); } });
   </script>
 
+  <script>
+    $(document).ready(function(){
+  $('.slider').slider();
+});
+  </script>
   <!--CSS-->
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
@@ -183,6 +188,7 @@
       background-color: #f1f1f1;
       color: deeppink;
     }
+
   </style>
 </head>
 
@@ -196,12 +202,12 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#" style="padding-top: 5px;"><img src='https://ifh.cc/g/raZeN4.png' border='0'
+        <a class="navbar-brand" href="/" style="padding-top: 5px;"><img src='https://ifh.cc/g/raZeN4.png' border='0'
             style="height: 40px;"></a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
+          <li class="active"><a href="">Home</a></li>
           <li><a href="/food/">Local food</a></li>
           <li><a href="/festival/">festival</a></li>
           <li><a href="/stay/">stay</a></li>
