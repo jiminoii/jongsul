@@ -25,15 +25,15 @@ def signup(request):
 def signin(request):
     if request.method == 'POST':
     # 회원정보 조회
-        email = request.POST.get('email')
+        id1 = request.POST.get('id1')
         pwd = request.POST.get('pwd')
-    try:
-    # select * from user where email=? and pwd=?
-        user = User.objects.get(email=email, pwd=pwd)
-        request.session['id1'] = id1
-        return render(request, 'signin_success.html')
-    except:
-        return render(request, 'signin_fail.html')
+        try:
+        # select * from user where email=? and pwd=?
+            user = User.objects.get(id1=id1, pwd=pwd)
+            request.session['id1'] = id1
+            return render(request, 'signin_success.html')
+        except:
+            return render(request, 'signin_fail.html')
     return render(request, 'signin.html')
 
 
@@ -158,14 +158,32 @@ def stay(request):
     result = result.text
     s_table = 0
     e_table = 0
-    star = ""
+    star = ''
+    parse = bs(result,'html.parser')
+    latlngs = parse.select('tbody tr')
+    tds = parse.select('tbody td')
+    i = 0
+    data = []
+    for latlan in latlngs:
+        obj = {}
+        obj['latlan'] = latlan['data-map']
+        if tds[i*4].text.find('\n') == -1:
+            obj['place'] = tds[i*4].text
+        else:
+            obj['place'] = tds[i*4].text[:tds[i*4].text.find('\n')-1]+tds[i*4].text[tds[i*4].text.find('\n')+1:]
+        if tds[i*4+2].text.find('\n') == -1:
+            obj['tel'] = tds[i*4+2].text
+        else:
+            obj['tel'] = tds[i*4+2].text[:tds[i*4+2].text.find('\n')-1]
+        i+=1
+        data.append(obj)
     while True:
         s_table = result.find('<table',e_table)
         s_table = result.find('>',s_table)
         if s_table == -1:
             break
         e_table = result.find('</table>',s_table)
-        star += '<div class="jumbotron"><table class="table table-hover"'+result[s_table:e_table+8]+'</div>'
+        star += '<table class="table table-hover"'+result[s_table:e_table+8]
     result = requests.get('https://www.tourandong.com/public/sub3/sub2_2.cshtml')
     result.encoding = 'utf-8'
     result = result.text
@@ -238,6 +256,7 @@ def stay(request):
         'contact3' : star3,
         'contact4' : star4,
         'contact5' : star5,
+        'data' : data
     }
     return render(request, 'stay.html',r_ta)
 
