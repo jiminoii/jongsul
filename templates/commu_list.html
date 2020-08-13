@@ -11,11 +11,11 @@
                 </tr>
             </thead>
             <tbody>
-                {% for user in user_list %}
+                {% for user in commu_list %}
                 <tr>
                     <td>{{ user.title }}</td>
                     <td>{{ user.content }}</td>
-                    <td>{{ user.user.name }}</td>
+                    <td>{{ user.user.id1 }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

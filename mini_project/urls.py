@@ -20,8 +20,12 @@ urlpatterns = [
     path('expmap_data/', views2.expmap_data),
     path('foodmap_data/', views4.foodmap_data),
     path('fes_map/', views3.map_data),
-    path('commu_write/', views.write),
-    path('user/list/', views.write),
+    path('commu/write/', views.write),
+    path('commu/list/', views.list),
+    path('commu/success/', views.write),
+    path('commu/fail/', views.write),
+    path('user/list', views.list),
+
 
 
 ]
