@@ -9,11 +9,37 @@ def index(request):
     return render(request, 'index.html')
 
 def food(request):
-    food_point = Food_Inpo.objects.order_by('id')
-    context = {
-    'food_point' : food_point
+    # food_point = Food_Inpo.objects.order_by('id')
+    # context = {
+    # 'food_point' : food_point
+    # }
+    # return render(request, 'food.html', context)
+    result = requests.get('https://www.tourandong.com/public/sub3/sub1.cshtml')
+    result.encoding = 'utf-8'
+    result = result.text
+    s_table = 0
+    e_table = 0
+    star = ["","","","","","","","","","","","","","",]
+    i=0
+    while True:
+        s_table = result.find('<table',e_table)
+        s_table = result.find('>',s_table)        
+        if s_table == -1:
+            break
+        e_table = result.find('</table>',s_table)
+        star[i] += '<div class="jumbotron"><table class="table table-hover"'+result[s_table:e_table+8]+'</div>'
+        i+=1
+    r_ta = {
+        'contact' : star[0],
+        'contact1' : star[1],
+        'contact2' : star[2],
+        'contact3' : star[3],
+        'contact4' : star[4],
+        'contact5' : star[5],
+        'contact6' : star[6],
     }
-    return render(request, 'food.html', context)
+    return render(request, 'food.html',r_ta)
+
     
 
 def exp(request):
