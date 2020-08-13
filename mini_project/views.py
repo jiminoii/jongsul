@@ -19,9 +19,21 @@ def signup(request):
         pwd = request.POST.get('pwd')
         users = User(id1=id1, name=name, pwd=pwd)
         users.save()
-        return HttpResponseRedirect('/index/')
+        return HttpResponseRedirect('/')
     return render(request, 'signup.html')
 
+def signin(request):
+    if request.method == 'POST':
+    # 회원정보 조회
+        email = request.POST.get('email')
+        pwd = request.POST.get('pwd')
+    try:
+    # select * from user where email=? and pwd=?
+        user = User.objects.get(email=email, pwd=pwd)
+        return render(request, 'signin_success.html')
+    except:
+        return render(request, 'signin_fail.html')
+    return render(request, 'signin.html')
 
 
 def food(request):
