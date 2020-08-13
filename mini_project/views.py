@@ -19,10 +19,29 @@ def signup(request):
         pwd = request.POST.get('pwd')
         users = User(id1=id1, name=name, pwd=pwd)
         users.save()
-        return HttpResponseRedirect('/index/')
+        return HttpResponseRedirect('/')
     return render(request, 'signup.html')
 
+def signin(request):
+    if request.method == 'POST':
+    # 회원정보 조회
+        id1 = request.POST.get('id1')
+        pwd = request.POST.get('pwd')
+        try:
+        # select * from user where email=? and pwd=?
+            user = User.objects.get(id1=id1, pwd=pwd)
+            request.session['id1'] = id1
+            
+            return render(request, 'signin_success.html')
+        except:
+            return render(request, 'signin_fail.html')
+    return render(request, 'signin.html')
 
+
+def signout(request):
+    del request.session['id1'] # 개별 삭제
+    request.session.flush() # 전체 삭제
+    return HttpResponseRedirect('/')
 
 def food(request):
     # food_point = Food_Inpo.objects.order_by('id')
@@ -140,20 +159,56 @@ def stay(request):
     result = result.text
     s_table = 0
     e_table = 0
-    star = ""
+    star = ''
+    parse = bs(result,'html.parser')
+    latlngs = parse.select('tbody tr')
+    tds = parse.select('tbody td')
+    i = 0
+    data = []
+    for latlan in latlngs:
+        obj = {}
+        obj['latlan'] = latlan['data-map']
+        if tds[i*4].text.find('\n') == -1:
+            obj['place'] = tds[i*4].text
+        else:
+            obj['place'] = tds[i*4].text[:tds[i*4].text.find('\n')-1]+tds[i*4].text[tds[i*4].text.find('\n')+1:]
+        if tds[i*4+2].text.find('\n') == -1:
+            obj['tel'] = tds[i*4+2].text
+        else:
+            obj['tel'] = tds[i*4+2].text[:tds[i*4+2].text.find('\n')-1]
+        i+=1
+        data.append(obj)
     while True:
         s_table = result.find('<table',e_table)
         s_table = result.find('>',s_table)
         if s_table == -1:
             break
         e_table = result.find('</table>',s_table)
-        star += '<div class="jumbotron"><table class="table table-hover"'+result[s_table:e_table+8]+'</div>'
+        star += '<table class="table table-hover"'+result[s_table:e_table+8]
     result = requests.get('https://www.tourandong.com/public/sub3/sub2_2.cshtml')
     result.encoding = 'utf-8'
     result = result.text
     s_table = 0
     e_table = 0
     star1 = ""
+    parse = bs(result,'html.parser')
+    latlngs = parse.select('tbody tr')
+    tds = parse.select('tbody td')
+    i = 0
+    data1 = []
+    for latlan in latlngs:
+        obj = {}
+        obj['latlan'] = latlan['data-map']
+        if tds[i*4].text.find('\n') == -1:
+            obj['place'] = tds[i*4].text
+        else:
+            obj['place'] = tds[i*4].text[:tds[i*4].text.find('\n')-1]+tds[i*4].text[tds[i*4].text.find('\n')+1:]
+        if tds[i*4+2].text.find('\n') == -1:
+            obj['tel'] = tds[i*4+2].text
+        else:
+            obj['tel'] = tds[i*4+2].text[:tds[i*4+2].text.find('\n')-1]
+        i+=1
+        data1.append(obj)
     while True:
         s_table = result.find('<table',e_table)
         s_table = result.find('>',s_table)
@@ -167,6 +222,24 @@ def stay(request):
     s_table = 0
     e_table = 0
     star2 = ""
+    parse = bs(result,'html.parser')
+    latlngs = parse.select('tbody tr')
+    tds = parse.select('tbody td')
+    i = 0
+    data2 = []
+    for latlan in latlngs:
+        obj = {}
+        obj['latlan'] = latlan['data-map']
+        if tds[i*5].text.find('\n') == -1:
+            obj['place'] = tds[i*5].text
+        else:
+            obj['place'] = tds[i*5].text[:tds[i*5].text.find('\n')-1]+tds[i*5].text[tds[i*5].text.find('\n')+1:]
+        if tds[i*5+2].text.find('\n') == -1:
+            obj['tel'] = tds[i*5+2].text
+        else:
+            obj['tel'] = tds[i*5+2].text[:tds[i*5+2].text.find('\n')-1]
+        i+=1
+        data2.append(obj)
     while True:
         s_table = result.find('<table',e_table)
         s_table = result.find('>',s_table)
@@ -180,6 +253,24 @@ def stay(request):
     s_table = 0
     e_table = 0
     star3 = ""
+    parse = bs(result,'html.parser')
+    latlngs = parse.select('tbody tr')
+    tds = parse.select('tbody td')
+    i = 0
+    data3 = []
+    for latlan in latlngs:
+        obj = {}
+        obj['latlan'] = latlan['data-map']
+        if tds[i*5].text.find('\n') == -1:
+            obj['place'] = tds[i*5].text
+        else:
+            obj['place'] = tds[i*5].text[:tds[i*5].text.find('\n')-1]+tds[i*5].text[tds[i*5].text.find('\n')+1:]
+        if tds[i*5+2].text.find('\n') == -1:
+            obj['tel'] = tds[i*5+2].text
+        else:
+            obj['tel'] = tds[i*5+2].text[:tds[i*5+2].text.find('\n')-1]
+        i+=1
+        data3.append(obj)
     while True:
         s_table = result.find('<table',e_table)
         s_table = result.find('>',s_table)
@@ -193,6 +284,23 @@ def stay(request):
     s_table = 0
     e_table = 0
     star4 = ""
+    parse = bs(result,'html.parser')
+    latlngs = parse.select('tbody tr')
+    tds = parse.select('tbody td')
+    i = 0
+    for latlan in latlngs:
+        obj = {}
+        obj['latlan'] = latlan['data-map']
+        if tds[i*4].text.find('\n') == -1:
+            obj['place'] = tds[i*4].text
+        else:
+            obj['place'] = tds[i*4].text[:tds[i*4].text.find('\n')-1]+tds[i*4].text[tds[i*4].text.find('\n')+1:]
+        if tds[i*4+2].text.find('\n') == -1:
+            obj['tel'] = tds[i*4+2].text
+        else:
+            obj['tel'] = tds[i*4+2].text[:tds[i*4+2].text.find('\n')-1]
+        i+=1
+        data.append(obj)
     while True:
         s_table = result.find('<table',e_table)
         s_table = result.find('>',s_table)
@@ -206,6 +314,23 @@ def stay(request):
     s_table = 0
     e_table = 0
     star5 = ""
+    parse = bs(result,'html.parser')
+    latlngs = parse.select('tbody tr')
+    tds = parse.select('tbody td')
+    i = 0
+    for latlan in latlngs:
+        obj = {}
+        obj['latlan'] = latlan['data-map']
+        if tds[i*4].text.find('\n') == -1:
+            obj['place'] = tds[i*4].text
+        else:
+            obj['place'] = tds[i*4].text[:tds[i*4].text.find('\n')-1]+tds[i*4].text[tds[i*4].text.find('\n')+1:]
+        if tds[i*4+2].text.find('\n') == -1:
+            obj['tel'] = tds[i*4+2].text
+        else:
+            obj['tel'] = tds[i*4+2].text[:tds[i*4+2].text.find('\n')-1]
+        i+=1
+        data1.append(obj)
     while True:
         s_table = result.find('<table',e_table)
         s_table = result.find('>',s_table)
@@ -220,9 +345,14 @@ def stay(request):
         'contact3' : star3,
         'contact4' : star4,
         'contact5' : star5,
+        'data' : data,
+        'data1' : data1,
+        'data2' : data2,
+        'data3' : data3,
     }
     return render(request, 'stay.html',r_ta)
 
+<<<<<<< HEAD
 def festival2(request):
     return render(request, 'festival2.html')
 
@@ -231,3 +361,32 @@ def festival3(request):
 
 def festival4(request):
     return render(request, 'festival4.html')
+=======
+def community(request):
+    return render(request, 'community.html')
+
+def write(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        try:
+            email = request.session['email']
+            # select * from user where email = ?
+            user = User.objects.get(email=email)
+            # insert into article (title, content, user_id) values (?, ?, ?)
+            article = Article(title=title, content=content, user=user)
+            article.save()
+            return render(request, 'commu_success.html')
+        except:
+            return render(request, 'commu_fail.html')
+
+    return render(request, 'commu_write.html')
+
+def list(request):
+
+    user_list = user.objects.order_by('id')
+    context = {
+        'user_list' : user_list
+    }
+    return render(request, '/user/list.html', context)
+>>>>>>> 67d065dcd09caa202d6dc0057379133ea3df3568
