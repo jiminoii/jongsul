@@ -31,6 +31,7 @@ def signin(request):
         # select * from user where email=? and pwd=?
             user = User.objects.get(id1=id1, pwd=pwd)
             request.session['id1'] = id1
+            
             return render(request, 'signin_success.html')
         except:
             return render(request, 'signin_fail.html')
@@ -40,7 +41,7 @@ def signin(request):
 def signout(request):
     del request.session['id1'] # 개별 삭제
     request.session.flush() # 전체 삭제
-    return HttpResponseRedirect('/index/')
+    return HttpResponseRedirect('/')
 
 def food(request):
     # food_point = Food_Inpo.objects.order_by('id')
