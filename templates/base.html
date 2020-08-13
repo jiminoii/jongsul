@@ -196,19 +196,31 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#" style="padding-top: 5px;"><img src='https://ifh.cc/g/raZeN4.png' border='0'
+        <a class="navbar-brand" href="/" style="padding-top: 5px;"><img src='https://ifh.cc/g/raZeN4.png' border='0'
             style="height: 40px;"></a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
+          <li class="active"><a href="/">Home</a></li>
           <li><a href="/food/">Local food</a></li>
           <li><a href="/festival/">festival</a></li>
           <li><a href="/stay/">stay</a></li>
           <li><a href="/exp/">travel</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          {% if request.session.id1 %}
+          <li>
+            <a href="/signout/">
+              <span class="glyphicon glyphicon-log-out"></span> Logout {{ request.session.id1 }} 님 반갑습니다.
+            </a>
+          </li>
+          {% else %}
+          <li>
+            <a href="/signin/">
+              <span class="glyphicon glyphicon-log-in"></span> Login
+            </a>
+          </li>
+          {% endif %}
         </ul>
       </div>
     </div>
