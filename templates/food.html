@@ -1,74 +1,53 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="container-fluid text-center">    
-    <div class="row content">
-      <div class="col-sm-2 sidenav">
-        <p><a href="#">찜닭</a></p>
-        <p><a href="#">구이</a></p>
-        <p><a href="#">카페</a></p>
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <p><a href="#food1">안동간고등어</a></p>
+      <!--추후 메인음식점/디저트(카페)로 카테고리 나눌까?-->
+      <p><a href="#food2">헛제사밥</a></p>
+      <p><a href="#food3">안동찜닭</a></p>
+      <p><a href="#food4">안동한우</a></p>
+      <p><a href="#food5">안동칼국수</a></p>
+      <p><a href="#food6">안동잉어찜</a></p>
+      <p><a href="#food7">안동매운탕</a></p>
+    </div>
+    <div class="col-sm-8 text-left">
+      <h1>먹거리 여행</h1>
+      <p>안동의 먹거리를 경험해보세요.</p>
+      <hr>
+      <div id="map" style="width:800px; height:400px; margin:0 auto;"></div>
+      <div class="container text-center">
+
       </div>
-      <div class="col-sm-8 text-left">    
-        <h1>먹거리 여행</h1>
-        <p>안동의 먹거리를 경험해보세요.</p>
-        <hr> 
-        <div id="map" style="width:800px; height:400px; margin:0 auto;"></div>
-        <div class="container text-center">         
-          <script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=fe4fe669c0e29292e13e253ea4ca331f"></script>
-          <script>
-          navigator.geolocation.getCurrentPosition(
-              function(position) {
-                  var lat = position.coords.latitude
-                  var lng = position.coords.longitude
-                  //alert(lat +','+ lng);
-                  var container = document.getElementById('map');
-                  var options = {
-                  center : new kakao.maps.LatLng(lat, lng), // 안동대
-                  level : 10
-                  };
-                  var map = new kakao.maps.Map(container, options);
-                  var markerPosition = new kakao.maps.LatLng(lat, lng);
-                  var marker = new kakao.maps.Marker({
-                  position: markerPosition
-                  });
-                  marker.setMap(map);
-                  
-                  $.ajax({
-                    url: '/foodmap_data/',
-                    data_2: {},
-                    success: function (res) {
-                      for (var i = 0; i < res.length; i++) {
-                          var marker = new kakao.maps.Marker({
-                            map: map, // 마커를 표시할 지도
-                            position: new kakao.maps.LatLng(res[i].lat, res[i].lng),
-                            title: res[i].title,
-                          });
+      <!-- 중앙 정렬하기 -->
+      <style>
+        th {
+          text-align: center;
+        }
+      </style>
+      <h3 id="food1">안동간고등어</h3>
+      {{contact|safe}}
 
-                          var iwContent = '<div style="padding:5px;">▶${res[i].title}◀</div>', // 인포윈도우에 표출될 내용
-                          iwRemoveable = true; // 인포윈도우 닫을 수 있는 x버튼
+      <h3 id="food2">헛제사밥</h3>
+      {{contact1|safe}}
 
-                          (function(m) {
-                            // 인포윈도우
-                            var infowindow = new kakao.maps.InfoWindow({
-                                content : iwContent,
-                                removable : iwRemoveable
-                            });
+      <h3 id="food3">안동찜닭</h3>
+      {{contact2|safe}}
 
-                            // 마커 클릭이벤트
-                            kakao.maps.event.addListener(m, 'click', function() {
-                                  infowindow.open(map, m);  
-                            });
-                          })(marker);
+      <h3 id="food4">안동한우</h3>
+      {{contact3|safe}}
 
-                      }
-                    }
-                  });
+      <h3 id="food5">안동칼국수</h3>
+      {{contact4|safe}}
 
-              })
-          </script>
-          </div>
-          {{contact|safe}}
-          <div class="jumbotron">
+      <h3 id="food6">안동잉어찜</h3>
+      {{contact5|safe}}
+
+      <h3 id="food7">안동매운탕</h3>
+      {{contact6|safe}}
+      <!-- <div class="jumbotron">
             <div class="container text-center">
                 <table class="table table-hover">
                     <thead>
@@ -82,7 +61,7 @@
                     <tbody>
                         {% for food in food_point %}
                         <tr>
-                            <td>{{ food.id }}</td>   <!-- 게시물 번호(PK) -->
+                            <td>{{ food.id }}</td>  
                             <td>{{ food.name }}</td>
                             <td>{{ food.address }}</td>     
                             <td>{{ food.tel }}</td>  
@@ -92,18 +71,71 @@
                 </table>
             </div>
           </div>
-      </div>
-      
+      </div> -->
+    </div>
 
-      <div class="col-sm-2 sidenav">
-        <div class="well">
-          <p>ADS</p>
-        </div>
-        <div class="well">
-          <p>ADS</p>
-        </div>
+    <div class="col-sm-2 sidenav">
+      <div class="well">
+        <p>ADS</p>
+      </div>
+      <div class="well">
+        <p>ADS</p>
       </div>
     </div>
   </div>
+</div>
 
+<script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=fe4fe669c0e29292e13e253ea4ca331f"></script>
+<script>
+  navigator.geolocation.getCurrentPosition(
+    function (position) {
+      var lat = position.coords.latitude
+      var lng = position.coords.longitude
+      //alert(lat +','+ lng);
+      var container = document.getElementById('map');
+      var options = {
+        center: new kakao.maps.LatLng(lat, lng), // 안동대
+        level: 10
+      };
+      var map = new kakao.maps.Map(container, options);
+      var markerPosition = new kakao.maps.LatLng(lat, lng);
+      var marker = new kakao.maps.Marker({
+        position: markerPosition
+      });
+      marker.setMap(map);
+
+      // 지도에 마커 표시 및 이벤트 생성
+      // $.ajax({
+      //   url: '/foodmap_data/',
+      //   data_2: {},
+      //   success: function (res) {
+      //     for (var i = 0; i < res.length; i++) {
+      //         var marker = new kakao.maps.Marker({
+      //           map: map, // 마커를 표시할 지도
+      //           position: new kakao.maps.LatLng(res[i].lat, res[i].lng),
+      //           title: res[i].title,
+      //         });
+
+      //         var iwContent = '<div style="padding:5px;">▶${res[i].title}◀</div>', // 인포윈도우에 표출될 내용
+      //         iwRemoveable = true; // 인포윈도우 닫을 수 있는 x버튼
+
+      //         (function(m) {
+      //           // 인포윈도우
+      //           var infowindow = new kakao.maps.InfoWindow({
+      //               content : iwContent,
+      //               removable : iwRemoveable
+      //           });
+
+      //           // 마커 클릭이벤트
+      //           kakao.maps.event.addListener(m, 'click', function() {
+      //                 infowindow.open(map, m);  
+      //           });
+      //         })(marker);
+
+      //     }
+      //   }
+      // });
+
+    })
+</script>
 {% endblock %}
