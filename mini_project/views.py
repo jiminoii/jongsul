@@ -22,12 +22,18 @@ def exp(request):
     res = requests.get(address)
     res.encoding = None
     stra =""
+    strb =""
     parse = bs(res.text, 'html.parser')
     a_list = parse.select('#contentDiv a p')
     for a in a_list:
-        stra += (a.text)[:-6]+'<br/>'
+        if a.text.find('전화') != -1:
+            stra += (a.text)[5:a.text.find('전화')]+'<br/>'
+            strb += (a.text)[a.text.find('전화')+5:]+'<br/>'
+        else:
+            stra += (a.text)[5:-6]+'<br/>'
     aa = {
         'contact' : stra,
+        'contact1' : strb,
         'gg' : info_list,
     }
     return render(request, 'exp.html', aa)
