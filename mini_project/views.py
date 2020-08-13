@@ -4,9 +4,43 @@ from food.models import Food_Inpo
 from exp.models import Inpo
 import requests
 from bs4 import BeautifulSoup as bs
+from user.models import User
 
 def index(request):
     return render(request, 'index.html')
+
+
+
+def signup(request):
+    if request.method == 'POST':
+        # 회원정보 저장
+        id1 = request.POST.get('id1')
+        name = request.POST.get('name')
+        pwd = request.POST.get('pwd')
+        users = User(id1=id1, name=name, pwd=pwd)
+        users.save()
+        return HttpResponseRedirect('/')
+    return render(request, 'signup.html')
+
+def signin(request):
+    if request.method == 'POST':
+    # 회원정보 조회
+        id1 = request.POST.get('id1')
+        pwd = request.POST.get('pwd')
+        try:
+        # select * from user where email=? and pwd=?
+            user = User.objects.get(id1=id1, pwd=pwd)
+            request.session['id1'] = id1
+            return render(request, 'signin_success.html')
+        except:
+            return render(request, 'signin_fail.html')
+    return render(request, 'signin.html')
+
+
+def signout(request):
+    del request.session['id1'] # 개별 삭제
+    request.session.flush() # 전체 삭제
+    return HttpResponseRedirect('/index/')
 
 def food(request):
     # food_point = Food_Inpo.objects.order_by('id')
