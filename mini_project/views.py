@@ -157,3 +157,31 @@ def stay(request):
         'contact5' : star5,
     }
     return render(request, 'stay.html',r_ta)
+
+def community(request):
+    return render(request, 'community.html')
+
+def write(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        try:
+        email = request.session['email']
+        # select * from user where email = ?
+        user = User.objects.get(email=email)
+        # insert into article (title, content, user_id) values (?, ?, ?)
+        article = Article(title=title, content=content, user=user)
+        article.save()
+        return render(request, 'commu_success'.html')
+    except:
+        return render(request, 'commu_fail.html')
+
+    return render(request, 'commu_write.html')
+
+def list(request):
+
+    board_list = Board.objects.order_by('id')
+    context = {
+        'board_list' : board_list
+    }
+    return render(request, 'commu_list.html', context)

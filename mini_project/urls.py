@@ -6,6 +6,7 @@ import food.views as views4
 import fas.views as views3
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
@@ -17,4 +18,7 @@ urlpatterns = [
     path('foodmap_data/', views4.foodmap_data),
 
     path('fes_map/', views3.map_data),
+    path('community/', views.community),
+    path('board/commu_write/', views.write),
+    path('board/list/', views.list),
 ]
