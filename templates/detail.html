@@ -1,22 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="well" style="background-color: white;">
-    <div class="container" style='margin-top:30px;'>
-        <div class="panel-group">
-            <div class="panel panel-default">
-                <div class="panel-heading" style='background-color: beige;'>
-                    {{ board.id }}번
-                </div>
-                <div class="panel-heading">{{ board.title }}</div>
-                <div class="panel-body">{{ board.content }}</div>
-                <div class="panel-footer">작성자 : {{ board.id1.name }}</div>
+<div class="container" style='margin-top:30px;'>
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading" style='background-color: rgb(0, 17, 46); color: white; ' >
+                {{ board.id }}번
             </div>
+            <div class="panel-heading">{{ board.title }}</div>
+            <div class="panel-body">{{ board.content }}</div>
+            <div class="panel-footer">작성자 : {{ board.id1.name }}</div>
         </div>
     </div>
-    <div class="container text-right">
-        <a href='/commu/list/' class="btn btn-info" id="list" style="float: left;">목록</a>
-        <a href='/commu/update/{{board.id}}' class="btn btn-warning" id="update">수정</a>
-        <a href='/commu/delete/{{ board.id }}/' class="btn btn-danger" id="delete">삭제</a>      
-    </div>
+</div>
+<div class="container text-right">
+    <a href='/commu/list/' class="btn btn-default" id="list">목록</a>
+    <a href='/commu/update/{{board.id}}' class="btn btn-default" id="update">수정</a>
+    <a href='/commu/delete/{{ board.id }}/' class="btn btn-default" id="delete">
+        삭제
+        </a>
+        
 </div>
 {% endblock %}
