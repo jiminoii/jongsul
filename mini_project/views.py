@@ -6,6 +6,9 @@ import requests
 from bs4 import BeautifulSoup as bs
 from user.models import User
 from user.models import Board
+from user.models import Comment
+
+
 def index(request):
     return render(request, 'index.html')
 
@@ -470,3 +473,20 @@ def delete(request, id):
         return render(request, 'delete_success.html')
     except:
         return render(request, 'delete_fail.html')
+
+def comment_write(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        content = request.POST.get('content')
+        try:
+            name = request.session['name']
+            # # select * from user where email = ?
+            comment = Comment.objects.get(name=name)
+            # insert into article (title, content, user_id) values (?, ?, ?)
+            comment = Comment(title_num=title_num, content=content, name=user)
+            comment.save()
+            return render(request, 'commu_success.html')
+        except:
+            return render(request, 'commu_fail.html')
+
+    return render(request, 'commu_write.html')
