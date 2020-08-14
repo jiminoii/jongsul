@@ -167,6 +167,7 @@ def exp(request):
     a_list = parse.select('.flower_spot ul li')
     a_list2 = parse.select('.flower_spot dt')
     for a in a_list2:
+        obj={}
         strc+="<tr>"
         strc+="<td>"+ a.text + "</td>"
         strc += '<td>'+(a_list[i].text)[6:]+'</td>'
