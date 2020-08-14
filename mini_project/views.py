@@ -409,16 +409,16 @@ def write(request):
     if request.method == 'POST':
         title = request.POST.get('title')
         content = request.POST.get('content')
-        # try:
-        id1 = request.session['id1']
-        # # select * from user where email = ?
-        user = User.objects.get(id1=id1)
-        # insert into article (title, content, user_id) values (?, ?, ?)
-        board = Board(title=title, content=content, id1=user)
-        board.save()
-        return render(request, 'commu_success.html')
-        # except:
-        #     return render(request, 'commu_fail.html')
+        try:
+            id1 = request.session['id1']
+            # # select * from user where email = ?
+            user = User.objects.get(id1=id1)
+            # insert into article (title, content, user_id) values (?, ?, ?)
+            board = Board(title=title, content=content, id1=user)
+            board.save()
+            return render(request, 'commu_success.html')
+        except:
+            return render(request, 'commu_fail.html')
 
     return render(request, 'commu_write.html')
 
