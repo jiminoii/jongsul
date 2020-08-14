@@ -424,7 +424,7 @@ def write(request):
 
 def list(request):
 
-    commu_list = Board.objects.order_by('id')
+    commu_list = Board.objects.order_by('-id')
     context = {
         'commu_list' : commu_list
     }
