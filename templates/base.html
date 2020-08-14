@@ -242,7 +242,7 @@
           {% if request.session.id1 %}
           <li>
             <a href="/signout/">
-              <span class="glyphicon glyphicon-log-out"></span> Logout {{ request.session.id1 }} 님 반갑습니다.
+              {{ request.session.name }} 님 반갑습니다.<span class="glyphicon glyphicon-log-out"></span> Logout 
             </a>
           </li>
           {% else %}
