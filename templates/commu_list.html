@@ -13,9 +13,13 @@
             <tbody>
                 {% for user in commu_list %}
                 <tr>
+                    <td>{{ user.id }}</td>
+<<<<<<< HEAD
                     <td>{{ user.title }}</td>
+=======
                     <td>{{ user.content }}</td>
-                    <td>{{ user.id1 }}</td>
+>>>>>>> e9ed392f6a88cb0b7866fb95d18d00df18bc4c50
+                    <td>{{ user.id1.name }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
