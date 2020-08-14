@@ -433,10 +433,11 @@ def list(request):
 def detail(request, id):
     # select * from article where id = ?
     board = Board.objects.get(id=id)
+    comment = Comment.objects.filter(title_num = board)
     context = {
-        'board' : board
+        'board' : board,
+        'comment' : comment
     }
-
     return render(request, 'detail.html', context)
 
 def update(request, id):
