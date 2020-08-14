@@ -31,7 +31,7 @@ def signin(request):
         # select * from user where email=? and pwd=?
             user = User.objects.get(id1=id1, pwd=pwd)
             request.session['id1'] = id1
-            
+            request.session['name'] = user.name
             return render(request, 'signin_success.html')
         except:
             return render(request, 'signin_fail.html')
