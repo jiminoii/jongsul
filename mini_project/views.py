@@ -477,16 +477,12 @@ def delete(request, id):
 def comment_write(request):
     if request.method == 'POST':
         name = request.POST.get('name')
-        content = request.POST.get('content')
+        content = request.POST.get('comment')
         title_num = request.POST.get('con_num')
         try:
             # insert into article (title, content, user_id) values (?, ?, ?)
             comment = Comment(title_num=title_num, content=content, name=name)
-            print(title_num)
-            print(content)
-            print(name)
             comment.save()
-            
             return render(request, 'comment_success.html')
         except:
             return render(request, 'comment_fail.html')
