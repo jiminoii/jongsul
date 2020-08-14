@@ -4,10 +4,7 @@ from food.models import Food_Inpo
 from exp.models import Inpo
 import requests
 from bs4 import BeautifulSoup as bs
-from user.models import User
-from user.models import Board
-from user.models import Comment
-
+from user.models import User,Comment,Board
 
 def index(request):
     return render(request, 'index.html')
@@ -476,12 +473,12 @@ def delete(request, id):
 
 def comment_write(request):
     if request.method == 'POST':
-        name = request.POST.get('name')
-        content = request.POST.get('comment')
-        title_num = request.POST.get('con_num')
+        name1 = request.POST.get('name')
+        content1 = request.POST.get('comment')
+        title_num1 = request.POST.get('con_num')
         try:
-            # insert into article (title, content, user_id) values (?, ?, ?)
-            comment = Comment(title_num=title_num, content=content, name=name)
+            num = Board.objects.get(id=title_num1)
+            comment = Comment(title_num=num, content=content1, name=name1)
             comment.save()
             return render(request, 'comment_success.html')
         except:
