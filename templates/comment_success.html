@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="jumbotron">
-    <div class="container text-center">
-        <h1>댓글 작성 성공</h1>
-        <a href='/commu/list/' class="btn btn-default" id="write">게시글 목록</a>
-    </div>
-</div>
+<script>
+    alert("작성완료.");
+    location.href="/commu/list";
+</script>
 
 {% endblock %}
