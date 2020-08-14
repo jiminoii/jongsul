@@ -92,11 +92,11 @@
             //alert(lat +','+ lng);
             var container = document.getElementById('map');
             var options = {
-              center: new kakao.maps.LatLng(lat, lng), // 안동대
-              level: 10
+              center: new kakao.maps.LatLng(36.560405, 128.731842), // 안동대
+              level: 3
             };
             var map = new kakao.maps.Map(container, options);
-            var markerPosition = new kakao.maps.LatLng(lat, lng);
+            var markerPosition = new kakao.maps.LatLng(36.560405, 128.731842);
             var marker = new kakao.maps.Marker({
               position: markerPosition
             });
