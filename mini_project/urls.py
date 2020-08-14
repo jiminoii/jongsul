@@ -30,7 +30,13 @@ urlpatterns = [
     path('user/list', views.list),
     path('commu/detail/<int:id>/', views.detail),
     path('commu/update/<int:id>/', views.update),
+<<<<<<< HEAD
     path('commu/delete/<int:id>/', views.delete), 
+=======
+    path('commu/update/<int:id>/success/', views.update),
+    path('commu/update/<int:id>/fail/', views.update),
+
+>>>>>>> f49c71b7d620b1d816c8862d573aef812b20295a
 
 
 ]
