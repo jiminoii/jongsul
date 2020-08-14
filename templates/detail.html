@@ -8,13 +8,13 @@
             </div>
             <div class="panel-heading">{{ board.title }}</div>
             <div class="panel-body">{{ board.content }}</div>
-            <div class="panel-footer">{{ board.id1 }}</div>
+            <div class="panel-footer">{{ board.id1.name }}</div>
         </div>
     </div>
 </div>
 <div class="container text-right">
-    <a href='' class="btn btn-default" id="list">목록</button>
-        <a href='' class="btn btn-default" id="update">수정</button>
-            <a href='' class="btn btn-default" id="delete">삭제</button>
+    <a href='/commu/list/' class="btn btn-default" id="list">목록</a>
+    <a href='' class="btn btn-default" id="update">수정</a>
+    <a href='' class="btn btn-default" id="delete">삭제</a>
 </div>
 {% endblock %}
