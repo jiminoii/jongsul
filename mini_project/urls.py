@@ -36,8 +36,4 @@ urlpatterns = [
     path('commu/delete/<int:id>/', views.delete),
     path('commu/datgle/', views.comment_write),
 
-
-
-
-
 ]
