@@ -12,7 +12,7 @@
             </thead>
             <tbody>
                 {% for user in commu_list %}
-                <tr>
+                <tr onclick='location="/commu/detail/{{ user.id }}" '>
                     <td>{{ user.id }}</td>
                     <td>{{ user.title }}</td>
                     <td>{{ user.id1.name }}</td>
