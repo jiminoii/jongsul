@@ -438,3 +438,22 @@ def detail(request, id):
     }
 
     return render(request, 'detail.html', context)
+
+def update(request, id):
+    # select * from article where id = ?
+    board = Board.objects.get(id=id)
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        try:
+            # update article set title = ?, content = ? where id = ?
+            board.title = title
+            board.content = content
+            board.save()
+            return render(request, 'update_success.html')
+        except:
+            return render(request, 'update_fail.html')
+    context = {
+    'board' : board
+    }
+    return render(request, 'update.html', context)
