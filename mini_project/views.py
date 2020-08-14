@@ -482,7 +482,11 @@ def comment_write(request):
         try:
             # insert into article (title, content, user_id) values (?, ?, ?)
             comment = Comment(title_num=title_num, content=content, name=name)
+            print(title_num)
+            print(content)
+            print(name)
             comment.save()
+            
             return render(request, 'comment_success.html')
         except:
             return render(request, 'comment_fail.html')
