@@ -32,6 +32,7 @@ urlpatterns = [
     path('commu/update/<int:id>/', views.update),
     path('commu/update/<int:id>/success/', views.update),
     path('commu/update/<int:id>/fail/', views.update),
+    path('commu/delete/<int:id>/', views.delete)
 
 
 
