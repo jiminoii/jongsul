@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="jumbotron">
+<div class="jumbotron" style="background-color: white;">
     <div class="container text-center">
-        <table class="table table-hover">
+        <table class="table table-hover" style="text-align: left;">
             <thead>
                 <tr>
                     <th>번호</th>
@@ -20,7 +20,8 @@
                 {% endfor %}
             </tbody>
         </table>
-        <button type="button" onclick = "location.href = '/commu/write/' "class="btn btn-default" style='float: right;'>게시글 작성</button>
+        <button type="button" onclick="location.href = '/commu/write/' " class="btn btn-default"
+            style='float: right;'>게시글 작성</button>
     </div>
 </div>
 {% endblock %}
