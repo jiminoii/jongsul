@@ -19,8 +19,9 @@
         <a href='/commu/delete/{{ board.id }}/' class="btn btn-danger" id="delete">삭제</a>
     </div>
     <div class="container">
-        <form action="" method="POST">
+        <form action="/commu/datgle/" method="POST">
             {% csrf_token %}
+            <input type="hidden" id="con_num" value="{{board.id}}">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" class="form-control" id="name" style="z-index:1;position:relative;display:block; opacity: 1;border-radius: 0px;">
