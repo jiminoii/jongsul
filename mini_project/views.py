@@ -449,6 +449,8 @@ def update(request, id):
         title = request.POST.get('title')
         content = request.POST.get('content')
         try:
+            id1 = request.session['id1']
+            user = User.objects.get(id1=id1)
             # update article set title = ?, content = ? where id = ?
             board.title = title
             board.content = content
@@ -463,6 +465,8 @@ def update(request, id):
 
 def delete(request, id):
     try:
+        id1 = request.session['id1']
+        user = User.objects.get(id1=id1)
         # select * from article where id = ?
         board = Board.objects.get(id=id)
         board.delete()
