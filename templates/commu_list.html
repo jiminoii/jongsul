@@ -12,15 +12,15 @@
             </thead>
             <tbody>
                 {% for user in commu_list %}
-                <tr>
+                <tr onclick='location="/commu/detail/{{ user.id }}" '>
                     <td>{{ user.id }}</td>
-                    <td>{{ user.content }}</td>
+                    <td>{{ user.title }}</td>
                     <td>{{ user.id1.name }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <button type="button" onclick = "location.href = '/commu/write/' "class="btn btn-default">게시글 작성</button>
+        <button type="button" onclick = "location.href = '/commu/write/' "class="btn btn-default" style='float: right;'>게시글 작성</button>
     </div>
 </div>
 {% endblock %}
