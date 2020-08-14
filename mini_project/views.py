@@ -457,3 +457,12 @@ def update(request, id):
     'board' : board
     }
     return render(request, 'update.html', context)
+
+def delete(request, id):
+    try:
+        # select * from article where id = ?
+        board = Board.objects.get(id=id)
+        board.delete()
+        return render(request, 'delete_success.html')
+    except:
+        return render(request, 'delete_fail.html')
