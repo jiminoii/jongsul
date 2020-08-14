@@ -31,7 +31,7 @@ def signin(request):
         # select * from user where email=? and pwd=?
             user = User.objects.get(id1=id1, pwd=pwd)
             request.session['id1'] = id1
-            
+            request.session['name'] = user.name
             return render(request, 'signin_success.html')
         except:
             return render(request, 'signin_fail.html')
@@ -457,3 +457,12 @@ def update(request, id):
     'board' : board
     }
     return render(request, 'update.html', context)
+
+def delete(request, id):
+    try:
+        # select * from article where id = ?
+        board = Board.objects.get(id=id)
+        board.delete()
+        return render(request, 'delete_success.html')
+    except:
+        return render(request, 'delete_fail.html')
