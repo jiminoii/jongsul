@@ -13,9 +13,9 @@
             <tbody>
                 {% for user in commu_list %}
                 <tr>
-                    <td>{{ user.title }}</td>
+                    <td>{{ user.id }}</td>
                     <td>{{ user.content }}</td>
-                    <td>{{ user.id1 }}</td>
+                    <td>{{ user.id1.name }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
