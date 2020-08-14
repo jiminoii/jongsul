@@ -352,16 +352,6 @@ def stay(request):
     }
     return render(request, 'stay.html',r_ta)
 
-<<<<<<< HEAD
-def festival2(request):
-    return render(request, 'festival2.html')
-
-def festival3(request):
-    return render(request, 'festival3.html')
-
-def festival4(request):
-    return render(request, 'festival4.html')
-=======
 def community(request):
     return render(request, 'community.html')
 
@@ -389,4 +379,3 @@ def list(request):
         'user_list' : user_list
     }
     return render(request, '/user/list.html', context)
->>>>>>> 67d065dcd09caa202d6dc0057379133ea3df3568
