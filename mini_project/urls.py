@@ -30,7 +30,7 @@ urlpatterns = [
     path('user/list', views.list),
     path('commu/detail/<int:id>/', views.detail),
     path('commu/update/<int:id>/', views.update),
-
+    path('commu/delete/<int:id>/', views.delete), 
 
 
 ]
