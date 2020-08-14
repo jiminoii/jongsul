@@ -3,7 +3,7 @@
 
 <div class="jumbotron">
     <div class="container text-center">
-        <form method="post" action="/board/update/{{ board.id }}/">
+        <form method="post" action="/commu/update/{{ board.id }}/"> {% csrf_token %}
             <div class="form-group">
                 <label for="title">Title:</label>
                 <input type="text" class="form-control" name="title" id="title" value="{{ board.title }}">
