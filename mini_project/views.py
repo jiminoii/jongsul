@@ -5,7 +5,7 @@ from exp.models import Inpo
 import requests
 from bs4 import BeautifulSoup as bs
 from user.models import User
-
+from user.models import Board
 def index(request):
     return render(request, 'index.html')
 
@@ -88,36 +88,74 @@ def exp(request):
     parse = bs(res.text, 'html.parser')
     a_list = parse.select('#contentDiv a p')
     a_list2 = parse.select('.tour_course_thum strong')
+    loc_list=[]
+    tel=""
     for a in a_list:
+        obj={}
         stra+="<tr>"
         stra+="<td>"+ a_list2[i].text + "</td>"
         i+=1
         if a.text.find('전화') != -1:
             stra += '<td>'+(a.text)[5:a.text.find('전화')]+'</td>'
+            juso=(a.text)[5:a.text.find('전화')]
             stra += '<td>'+(a.text)[a.text.find('전화')+5:-6]+'</td>'
+            tel=(a.text)[a.text.find('전화')+5:-7]
         else:
             stra += '<td>'+(a.text)[5:-6]+'</td><td></td>'
+            juso=(a.text)[5:-6]
         stra+="</tr>"
+        urla=" https://maps.googleapis.com/maps/api/geocode/json?address="+juso+"&key=AIzaSyBiulBepetV6p2prBzpL-K7ss2-b_xP5NU"
+        res = requests.get(urla)
+        parse=res.json()
+        ress=parse['results']
+        geo=ress[0].get('geometry')
+        loc=geo['location']
+        lat=loc.get('lat')
+        lng=loc.get('lng')
+        obj['lat'] = lat
+        obj['lng'] = lng
+        obj['tel'] = tel
+        loc_list.append(obj)
+
     stra+="</table>"
+    
 
     address2 = 'https://www.tourandong.com/public/sub2/sub5.cshtml'
     res = requests.get(address2)
     res.encoding = None
     strb ="<table class='table table-hover'><thead><tr><th style='text-align: center;'>상호명</th><th style='text-align: center;'>주소</th><th style='text-align: center;'>전화번호</th></tr></thead>"
+    
     i=0
     parse = bs(res.text, 'html.parser')
     a_list = parse.select('#contentDiv a p')
     a_list2 = parse.select('.tour_course_thum strong')
+    loc_list1=[]
     for a in a_list:
+        obj={}
         strb+="<tr>"
         strb+="<td>"+ a_list2[i].text + "</td>"
         i+=1
         if a.text.find('전화') != -1:
             strb += '<td>'+(a.text)[5:a.text.find('전화')]+'</td>'
+            juso=(a.text)[5:a.text.find('전화')]
             strb += '<td>'+(a.text)[a.text.find('전화')+5:-6]+'</td>'
+            tel=(a.text)[a.text.find('전화')+5:-7]
         else:
             strb += '<td>'+(a.text)[5:-6]+'</td><td></td>'
+            juso=(a.text)[5:-6]
         strb+="</tr>"
+        urla=" https://maps.googleapis.com/maps/api/geocode/json?address="+juso+"&key=AIzaSyBiulBepetV6p2prBzpL-K7ss2-b_xP5NU"
+        res = requests.get(urla)
+        parse=res.json()
+        ress=parse['results']
+        geo=ress[0].get('geometry')
+        loc=geo['location']
+        lat=loc.get('lat')
+        lng=loc.get('lng')
+        obj['lat'] = lat
+        obj['lng'] = lng
+        obj['tel'] = tel
+        loc_list1.append(obj)
     strb+="</table>"
 
     address3 = 'https://www.tourandong.com/public/sub2/sub6.cshtml'
@@ -129,6 +167,7 @@ def exp(request):
     a_list = parse.select('.flower_spot ul li')
     a_list2 = parse.select('.flower_spot dt')
     for a in a_list2:
+        obj={}
         strc+="<tr>"
         strc+="<td>"+ a.text + "</td>"
         strc += '<td>'+(a_list[i].text)[6:]+'</td>'
@@ -144,6 +183,8 @@ def exp(request):
         'contact' : stra,
         'contact2' : strb,
         'contact3' : strc,
+        'loc_contact':loc_list,
+        'loc_contact1':loc_list1,
     }
     
     return render(request, 'exp.html', aa)
@@ -352,6 +393,15 @@ def stay(request):
     }
     return render(request, 'stay.html',r_ta)
 
+def festival2(request):
+    return render(request, 'festival2.html')
+
+def festival3(request):
+    return render(request, 'festival3.html')
+
+def festival4(request):
+    return render(request, 'festival4.html')
+
 def community(request):
     return render(request, 'community.html')
 
@@ -360,12 +410,12 @@ def write(request):
         title = request.POST.get('title')
         content = request.POST.get('content')
         try:
-            email = request.session['email']
-            # select * from user where email = ?
-            user = User.objects.get(email=email)
+            id1 = request.session['id1']
+            # # select * from user where email = ?
+            user = User.objects.get(id1=id1)
             # insert into article (title, content, user_id) values (?, ?, ?)
-            article = Article(title=title, content=content, user=user)
-            article.save()
+            board = Board(title=title, content=content, id1=user)
+            board.save()
             return render(request, 'commu_success.html')
         except:
             return render(request, 'commu_fail.html')
@@ -374,8 +424,36 @@ def write(request):
 
 def list(request):
 
-    user_list = user.objects.order_by('id')
+    commu_list = Board.objects.order_by('-id')
     context = {
-        'user_list' : user_list
+        'commu_list' : commu_list
     }
-    return render(request, '/user/list.html', context)
+    return render(request, 'commu_list.html', context)
+
+def detail(request, id):
+    # select * from article where id = ?
+    board = Board.objects.get(id=id)
+    context = {
+        'board' : board
+    }
+
+    return render(request, 'detail.html', context)
+
+def update(request, id):
+    # select * from article where id = ?
+    board = Board.objects.get(id=id)
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        try:
+            # update article set title = ?, content = ? where id = ?
+            board.title = title
+            board.content = content
+            board.save()
+            return render(request, 'update_success.html')
+        except:
+            return render(request, 'update_fail.html')
+    context = {
+    'board' : board
+    }
+    return render(request, 'update.html', context)
