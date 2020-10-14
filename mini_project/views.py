@@ -37,7 +37,7 @@ def signin(request):
             return render(request, 'signin_fail.html')
     return render(request, 'signin.html')
 
-
+#asdfghj
 def signout(request):
     del request.session['id1'] # 개별 삭제
     request.session.flush() # 전체 삭제
